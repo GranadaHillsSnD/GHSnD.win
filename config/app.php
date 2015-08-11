@@ -191,7 +191,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-
+        'Twitter'   => j7mbo\twitter_api_php\TwitterAPIExchange::class,
     ],
 
 ];
