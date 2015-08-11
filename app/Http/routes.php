@@ -17,3 +17,5 @@ Route::get('/', function () {
 Route::get('/instagram', 'SocialMediaController@getInstagrams');
 
 Route::get('/twitter', 'SocialMediaController@getTweets');
+
+Route::get('/calendar', 'CalendarController@getCalendarEvents');

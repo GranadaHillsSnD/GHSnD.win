@@ -37,7 +37,7 @@ class SocialMediaController extends Controller
         'consumer_secret'             => env('TWITTER_CONSUMER_SECRET')
       );
       $url = 'https://api.twitter.com/1.1/search/tweets.json';
-      $getField = 'q=%23codeforamerica&result_type=recent';
+      $getField = 'q=%23cats&result_type=recent';
       $requestMethod = 'GET';
       $twitter = new TwitterAPIExchange($settings);
       $content = $twitter->setGetfield($getField)
