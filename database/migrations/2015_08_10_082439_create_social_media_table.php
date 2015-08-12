@@ -15,13 +15,19 @@ class CreateSocialMediaTable extends Migration
         Schema::create('social_media', function (Blueprint $table) {
             $table->increments('social_media_id');
             $table->string('username');
+            $table->string('profile_pic_url');
             $table->string('tweet');
-            $table->string('imgUrl');
             $table->string('caption');
             $table->string('message');
             $table->string('source');
+            $table->string('link');
+            $table->string('imgUrl');
+            $table->integer('width');
+            $table->integer('height');
+            $table->string('resize');
+            $table->string('approved');
             $table->integer('approver_id');
-            $table->timestamp('datetime_posted');
+            $table->datetime('datetime_posted');
             $table->timestamps();
         });
     }
