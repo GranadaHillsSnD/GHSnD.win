@@ -46,7 +46,7 @@
 			<div id="content">
 				<div class="inner">
 					@yield('banner')
-					
+
 					@yield('articles', 'Social Media and Admin Updates')
 
 					@yield('pagination')
@@ -176,7 +176,7 @@
 
 				<!-- Copyright -->
 					<ul id="copyright">
-						<li>&copy; Untitled.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						<li>&copy; GHCHS Speech &amp; Debate.</li><li>Design: Cory Cunanan</a></li>
 					</ul>
 
 			</div>

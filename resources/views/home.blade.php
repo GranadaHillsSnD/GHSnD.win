@@ -23,7 +23,19 @@
     padding-left: 5px;
     padding-right: 5px;
   }
+  .inner {
+    overflow: hidden;
+  }
+  #banner {
+    width: 1000px;
+    height: 200px;
+    padding-bottom: 50px;
+  }
 </style>
+@stop
+
+@section('banner')
+    <img id="banner" src="{{ URL::asset('assets/images/ghsnd_cover_photo.jpg')}}">
 @stop
 
 @section('articles')
