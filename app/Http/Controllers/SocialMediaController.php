@@ -14,7 +14,7 @@ class SocialMediaController extends Controller
 {
 
     public function getInstagrams() {
-      $tag = 'catsofinstagram';
+      $tag = 'ghchs';
       $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.env('INSTAGRAM_CLIENT_ID');
       $content = file_get_contents($url);
       $json = json_decode($content, true);
@@ -25,8 +25,8 @@ class SocialMediaController extends Controller
           $imgUrl = $images['images']['standard_resolution']['url'];
           $description = $images['caption']['text'];
           $datetime_posted = $images['caption']['created_time'];
-          $datetime_posted = Carbon::createFromTimestamp($datetime_posted)->toDateTimeString()."<br>";
-          $username = $images['caption']['from']['username']."<br>";
+          $datetime_posted = Carbon::createFromTimestamp($datetime_posted)->toDateTimeString();
+          $username = $images['caption']['from']['username'];
           $profilePic = $images['caption']['from']['profile_picture'];
           $link = $images['link'];
           $insta = new SocialMedia;
@@ -57,7 +57,7 @@ class SocialMediaController extends Controller
         'consumer_secret'             => env('TWITTER_CONSUMER_SECRET')
       );
       $url = 'https://api.twitter.com/1.1/search/tweets.json';
-      $getField = 'q=%23cats&result_type=recent';
+      $getField = 'q=%23codeforamerica&result_type=recent';
       $requestMethod = 'GET';
       $twitter = new TwitterAPIExchange($settings);
       $content = $twitter->setGetfield($getField)
@@ -73,7 +73,7 @@ class SocialMediaController extends Controller
           $year = $date[5];
           $time = $date[3];
           $datetime = Carbon::createFromFormat('Y-m-d H:i:s', $year."-".$month."-".$day." ".$time, 'UTC');
-          $datetime->setTimezone('America/Los_Angeles');
+          $datetime = $datetime->setTimezone('America/Los_Angeles');
           $username = $tweet_info['user']['screen_name'];
           $profile_img = $tweet_info['user']['profile_image_url'];
           $link = $imgUrl = $resize = 'N/A';
@@ -107,7 +107,7 @@ class SocialMediaController extends Controller
           $newTweet->source = 'Twitter';
           $newTweet->approved = 'Pending';
           $newTweet->approver_id = -1;
-          $newTweet->datetime_posted = $datetime_posted;
+          $newTweet->datetime_posted = $datetime;
           $newTweet->save();
           echo "Saved!";
       }

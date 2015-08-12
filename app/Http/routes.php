@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'FeedController@showLatestFeed');
+
 Route::get('/instagram', 'SocialMediaController@getInstagrams');
 
 Route::get('/twitter', 'SocialMediaController@getTweets');
