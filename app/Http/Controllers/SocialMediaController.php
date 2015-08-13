@@ -78,8 +78,8 @@ class SocialMediaController extends Controller
           $profile_img = $tweet_info['user']['profile_image_url'];
           $link = $imgUrl = $resize = 'N/A';
           $height = $width = -1;
-          if(isset($tweet_info['entities']['media'][0]['display_url'])) {
-            $link = $tweet_info['entities']['media'][0]['display_url'];
+          if(isset($tweet_info['entities']['media'][0]['expanded_url'])) {
+            $link = $tweet_info['entities']['media'][0]['expanded_url'];
           }
           if(isset($tweet_info['entities']['media'][0]['media_url_https'])) {
             $imgUrl = $tweet_info['entities']['media'][0]['media_url_https'];

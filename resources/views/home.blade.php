@@ -27,7 +27,7 @@
     overflow: hidden;
   }
   #banner {
-    width: 1000px;
+    width: 700px;
     height: 200px;
     padding-bottom: 50px;
   }
@@ -35,7 +35,7 @@
 @stop
 
 @section('banner')
-    <img id="banner" src="{{ URL::asset('assets/images/ghsnd_cover_photo.jpg')}}">
+  <div><h1>Offical GHCHS Speed & Debate Site</h1></div>
 @stop
 
 @section('articles')
@@ -48,7 +48,7 @@
         if they get too long. You can also remove the <p> entirely if you don't
         need a subtitle.
       -->
-      <h2><img class="profilePic" src="{{ $post->profile_pic_url }}"><a href="#">@if($post->source == 'Instagram') Instagram - {{$post->username}} @endif
+      <h2><img class="profilePic" src="{{ $post->profile_pic_url }}"><a href="#">@if($post->source == 'Instagram') Instagram - @<span>{{$post->username}}</span> @endif
         @if($post->source == 'Twitter') Twitter - @<span>{{ $post->username }}</span> @endif</a>
       </h2>
     </header>
@@ -72,7 +72,7 @@
         <li><a href="#" class="icon fa-facebook">128</a></li>
       </ul>
     </div>
-    <a href="#" class="image featured">@if($post->imgUrl != 'N/A')<img src="{{ $post->imgUrl }}" alt="" href="{{ $post->link }}"/>@endif</a>
+    <a href="{{ $post->link }}" class="image featured">@if($post->imgUrl != 'N/A')<img src="{{ $post->imgUrl }}" alt=""/>@endif</a>
     <h2 class="caption">
       @if($post->source == 'Instagram')
         {{ $post->caption }}
