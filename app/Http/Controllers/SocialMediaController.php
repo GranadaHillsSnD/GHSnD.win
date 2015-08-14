@@ -14,7 +14,7 @@ class SocialMediaController extends Controller
 {
 
     public function getInstagrams() {
-      $tag = 'ghchs';
+      $tag = 'codeforamerica';
       $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.env('INSTAGRAM_CLIENT_ID');
       $content = file_get_contents($url);
       $json = json_decode($content, true);
@@ -112,6 +112,36 @@ class SocialMediaController extends Controller
           echo "Saved!";
       }
 
+    }
+
+    public function approve($id) {
+      if(\Auth::check()) {
+        $admin = \Auth::user();
+        $media = SocialMedia::findOrFail($id);
+        $media->approved = 'Approved';
+        $media->approver_id = $admin->admin_id;
+        $media->save();
+
+        return redirect('/admin');
+      }
+      else {
+        return redirect('/');
+      }
+    }
+
+    public function deny($id) {
+      if(\Auth::check()) {
+        $admin = \Auth::user();
+        $media = SocialMedia::findOrFail($id);
+        $media->approved = 'Denied';
+        $media->approver_id = $admin->admin_id;
+        $media->save();
+
+        return redirect('/admin');
+      }
+      else {
+        return redirect('/');
+      }
     }
     /**
      * Display a listing of the resource.

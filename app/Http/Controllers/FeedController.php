@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class FeedController extends Controller
 {
     public function showLatestFeed() {
-      $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->paginate(10);
+      $social_media = DB::table('social_media')->where('approved', 'Approved')->orderBy('datetime_posted', 'asc')->paginate(10);
 
       return view('home', ['soc_med' => $social_media]);
     }
