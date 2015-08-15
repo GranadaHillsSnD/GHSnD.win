@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -11,9 +12,25 @@ use App\Http\Controllers\Controller;
 class FeedController extends Controller
 {
     public function showLatestFeed() {
-      $social_media = DB::table('social_media')->where('approved', 'Approved')->orderBy('datetime_posted', 'asc')->paginate(10);
+      $social_media = DB::table('social_media')->where('approved', 'Approved')->orderBy('datetime_posted', 'desc')->paginate(10);
+      $first = new Carbon('first day of this month');
+      $date = substr($first, 0, 10);
+      $first = Carbon::createFromFormat('Y-m-d', $date)->dayOfWeek;
+      $last = new Carbon ('last day of this month');
+      $date = substr($last, 0, 10);
+      $last = Carbon::createFromFormat('Y-m-d', $date)->dayOfWeek;
+      $numDays = Carbon::today()->daysInMonth;
+      $numDays2 = $numDays - ((7 - $first) + $last + 1); //did some math here
+      $numWeeks = (int)($numDays2/7);
+      $carbon = [
+        'first' => $first,
+        'last' => $last,
+        'numWeeks' => $numWeeks,
+        'numDays' => $numDays,
+        'today' => (int)substr(substr(Carbon::today(), 0, 10), 8, 5)
+      ];
 
-      return view('home', ['soc_med' => $social_media]);
+      return view('home', ['soc_med' => $social_media, 'carbon' => $carbon]);
     }
     /**
      * Display a listing of the resource.

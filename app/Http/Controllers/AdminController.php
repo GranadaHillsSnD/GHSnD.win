@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
         if(\Auth::check()) {
           $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Pending')->get();
-          return view('auth.home', ['admin' => \Auth::user(), 'soc_media' => $social_media]);
+          return view('auth.home', ['admin' => \Auth::user(), 'soc_media' => $social_media, 'pageHeader' => 'Pending Approval']);
         }
         else {
           return redirect('admin/login');
@@ -30,7 +30,7 @@ class AdminController extends Controller
     public function showApproved() {
       if(\Auth::check()) {
         $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Approved')->get();
-        return view('auth.home', ['admin' => \Auth::user(), 'soc_media' => $social_media]);
+        return view('auth.home', ['admin' => \Auth::user(), 'soc_media' => $social_media, 'pageHeader' => 'Approved']);
       }
       else {
         return redirect('admin/login');
@@ -39,7 +39,7 @@ class AdminController extends Controller
     public function showDenied() {
       if(\Auth::check()) {
         $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Denied')->get();
-        return view('auth.home', ['admin' => \Auth::user(), 'soc_media' => $social_media]);
+        return view('auth.home', ['admin' => \Auth::user(), 'soc_media' => $social_media, 'pageHeader' => 'Denied']);
       }
       else {
         return redirect('admin/login');

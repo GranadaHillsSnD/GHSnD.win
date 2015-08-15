@@ -14,10 +14,10 @@
 Route::get('/', 'FeedController@showLatestFeed');
 
 // Authentication routes...
-Route::get('/admin/login', 'Auth\AuthController@getLogin');
-Route::post('/admin/login', 'Auth\AuthController@postLogin');
+Route::get('/admin/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
+Route::post('/admin/login', ['as' => 'auth.login', 'uses' =>'Auth\AuthController@postLogin']);
 Route::get('/admin/logout', 'Auth\AuthController@getLogout');
-Route::get('/admin', 'AdminController@index');
+Route::get('/admin', ['as' => 'auth', 'uses' => 'AdminController@index']);
 
 Route::patch('/admin/media/deny/{id}', ['as' => 'media.deny', 'uses' => 'SocialMediaController@deny']);
 Route::patch('/admin/media/approve/{id}', ['as' => 'media.approve', 'uses' => 'SocialMediaController@approve']);

@@ -233,7 +233,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Pending Approval</h1>
+                    <h1 class="page-header">{{ $pageHeader }}</h1>
                     @foreach($soc_media as $post)
                       <div class="col-lg-12 post">
                         <p>Source: {{ $post->source }} {!! Form::open([

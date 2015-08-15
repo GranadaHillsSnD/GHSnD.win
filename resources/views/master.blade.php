@@ -10,6 +10,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cinzel">
 		<link rel="shortcut icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 		<link rel="stylesheet" href="{{ URL::asset('assets/css/main.css') }}" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
@@ -31,18 +32,72 @@
       height: 75px;
     }
   }
+	@media screen and (min-width: 1000px) {
+		#primaryLogo {
+			padding-left: .3em;
+		}
+		.title-banner {
+			padding-bottom: 5em;
+			padding-top: 5em;
+			background-image: url(https://dl.dropboxusercontent.com/u/48479368/GHSnD/cover-photo.png);
+			background-size: cover;
+			background-position: 25% 25%;
+		}
+	}
+	@media screen and (max-width: 999px) {
+		.title-banner {
+			padding-top: 5em;
+			background-image: url(https://dl.dropboxusercontent.com/u/48479368/GHSnD/cover-photo.png);
+			background-size: cover;
+			background-position: 25% 25%;
+		}
+		.banner-text {
+			font-size: 50px;
+			color: #fff;
+			font-weight:100;
+			text-align: center;
+			padding-left: 0em;
+			line-height: 1.3em;
+			font-family: "Source Sans Pro", sans-serif;
+		}
+	}
+	@media screen and (min-width: 1000px) {
+		.banner-text {
+			font-size: 50px;
+			color: #fff;
+			font-weight:100;
+			text-align: center;
+			padding-bottom: 10px;
+			padding-left: 5em;
+			font-family: "Source Sans Pro", sans-serif;
+		}
+	}
   #titleBar {
     height: 75px;
   }
   #titleBar .toggle:before {
     height: 45px;
     line-height: 45px;
+		background: #16621b;
   }
+	#titleBar .toggle {
+		top: 7px;
+	}
+	#content {
+		box-shadow: inset 0px 5px 0px rgba(0, 0, 0, 0.2);
+	}
+	.banner-text {
+		text-shadow: 1.5px 1.5px #707070;
+	}
+
 	</style>
 	@yield('styles')
 	<body>
 
 		<!-- Content -->
+		<div class="title-banner">
+			<h1 class="banner-text">GHCHS Speech and Debate</h1>
+		</div>
 			<div id="content">
 				<div class="inner">
 					@yield('banner')
@@ -63,72 +118,20 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="#">Latest Post</a></li>
-							<li><a href="#">Archives</a></li>
-							<li><a href="#">About Me</a></li>
-							<li><a href="#">Contact Me</a></li>
+							<li class="current"><a href="#">Home</a></li>
+							<li><a href="#">Team Updates</a></li>
+							<li><a href="#">Recent Posts</a></li>
+							<li><a href="#">Calendar</a></li>
+							<li><a href="#">Contact</a></li>
+							<li><a href="#">About Us</a></li>
+							<li><a href"#">Resources</a></li>
 						</ul>
 					</nav>
 
           <!-- Calendar -->
   					<section class="box calendar">
   						<div class="inner">
-  							<table>
-  								<caption>July 2014</caption>
-  								<thead>
-  									<tr>
-  										<th scope="col" title="Monday">M</th>
-  										<th scope="col" title="Tuesday">T</th>
-  										<th scope="col" title="Wednesday">W</th>
-  										<th scope="col" title="Thursday">T</th>
-  										<th scope="col" title="Friday">F</th>
-  										<th scope="col" title="Saturday">S</th>
-  										<th scope="col" title="Sunday">S</th>
-  									</tr>
-  								</thead>
-  								<tbody>
-  									<tr>
-  										<td colspan="4" class="pad"><span>&nbsp;</span></td>
-  										<td><span>1</span></td>
-  										<td><span>2</span></td>
-  										<td><span>3</span></td>
-  									</tr>
-  									<tr>
-  										<td><span>4</span></td>
-  										<td><span>5</span></td>
-  										<td><a href="#">6</a></td>
-  										<td><span>7</span></td>
-  										<td><span>8</span></td>
-  										<td><span>9</span></td>
-  										<td><a href="#">10</a></td>
-  									</tr>
-  									<tr>
-  										<td><span>11</span></td>
-  										<td><span>12</span></td>
-  										<td><span>13</span></td>
-  										<td class="today"><a href="#">14</a></td>
-  										<td><span>15</span></td>
-  										<td><span>16</span></td>
-  										<td><span>17</span></td>
-  									</tr>
-  									<tr>
-  										<td><span>18</span></td>
-  										<td><span>19</span></td>
-  										<td><span>20</span></td>
-  										<td><span>21</span></td>
-  										<td><span>22</span></td>
-  										<td><a href="#">23</a></td>
-  										<td><span>24</span></td>
-  									</tr>
-  									<tr>
-  										<td><a href="#">25</a></td>
-  										<td><span>26</span></td>
-  										<td><span>27</span></td>
-  										<td><span>28</span></td>
-  										<td class="pad" colspan="3"><span>&nbsp;</span></td>
-  									</tr>
-  								</tbody>
-  							</table>
+  							@yield('calendar')
   						</div>
   					</section>
 				<!-- Search -->
@@ -138,15 +141,6 @@
 						</form>
 					</section>
 
-				<!-- Text -->
-					<section class="box text-style1">
-						<div class="inner">
-							<p>
-								<strong>Striped:</strong> A free and fully responsive HTML5 site
-								template designed by <a href="http://n33.co/">AJ</a> for <a href="http://html5up.net/">HTML5 UP</a>
-							</p>
-						</div>
-					</section>
 
 				<!-- Recent Posts -->
 					<section class="box recent-posts">
@@ -162,17 +156,6 @@
 						</ul>
 					</section>
 
-				<!-- Recent Comments -->
-					<section class="box recent-comments">
-						<header>
-							<h2>Recent Comments</h2>
-						</header>
-						<ul>
-							<li>case on <a href="#">Lorem ipsum dolor</a></li>
-							<li>molly on <a href="#">Sed dolore magna</a></li>
-							<li>case on <a href="#">Sed dolore magna</a></li>
-						</ul>
-					</section>
 
 				<!-- Copyright -->
 					<ul id="copyright">
