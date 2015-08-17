@@ -13,19 +13,23 @@
 
 Route::get('/', 'FeedController@showLatestFeed');
 
+Route::get('/updates', 'FeedController@showTeamUpdates');
+
+Route::get('/about', 'FeedController@showAbout');
+
+Route::get('/instagram', 'SocialMediaController@getInstagrams');
+Route::get('/self', 'SocialMediaController@getSelfInstagrams');
+
+Route::get('/twitter', 'SocialMediaController@getTweets');
+
+Route::get('/calendar', 'CalendarController@index');
+
 // Authentication routes...
 Route::get('/admin/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/admin/login', ['as' => 'auth.login', 'uses' =>'Auth\AuthController@postLogin']);
 Route::get('/admin/logout', 'Auth\AuthController@getLogout');
 Route::get('/admin', ['as' => 'auth', 'uses' => 'AdminController@index']);
-
 Route::patch('/admin/media/deny/{id}', ['as' => 'media.deny', 'uses' => 'SocialMediaController@deny']);
 Route::patch('/admin/media/approve/{id}', ['as' => 'media.approve', 'uses' => 'SocialMediaController@approve']);
 Route::get('/admin/approved', 'AdminController@showApproved');
 Route::get('/admin/denied', 'AdminController@showDenied');
-
-Route::get('/instagram', 'SocialMediaController@getInstagrams');
-
-Route::get('/twitter', 'SocialMediaController@getTweets');
-
-Route::get('/calendar', 'CalendarController@getCalendarEvents');

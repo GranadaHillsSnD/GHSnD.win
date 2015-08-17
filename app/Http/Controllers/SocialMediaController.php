@@ -14,13 +14,10 @@ class SocialMediaController extends Controller
 {
 
     public function getInstagrams() {
-      $tag = 'codeforamerica';
+      $tag = 'ghsnd';
       $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.env('INSTAGRAM_CLIENT_ID');
       $content = file_get_contents($url);
       $json = json_decode($content, true);
-      // echo "<pre>";
-      // var_dump($json);
-      // echo "</pre>";
       foreach($json['data'] as $images) {
           $imgUrl = $images['images']['standard_resolution']['url'];
           $description = $images['caption']['text'];
@@ -29,24 +26,65 @@ class SocialMediaController extends Controller
           $username = $images['caption']['from']['username'];
           $profilePic = $images['caption']['from']['profile_picture'];
           $link = $images['link'];
-          $insta = new SocialMedia;
-          $insta->username = $username;
-          $insta->profile_pic_url = $profilePic;
-          $insta->tweet = 'N/A';
-          $insta->caption = $description;
-          $insta->imgUrl = $imgUrl;
-          $insta->message = 'N/A';
-          $insta->source = 'Instagram';
-          $insta->link = $link;
-          $insta->width = 0;
-          $insta->height = 0;
-          $insta->resize = 'fit';
-          $insta->approved = 'Pending';
-          $insta->approver_id = -1;
-          $insta->datetime_posted = $datetime_posted;
-          $insta->save();
-          echo "Saved!";
+          if (SocialMedia::where('imgUrl', $imgUrl)->exists()) {
+            echo "This post already exists";
+          }
+          else{
+            $insta = new SocialMedia;
+            $insta->username = $username;
+            $insta->profile_pic_url = $profilePic;
+            $insta->tweet = 'N/A';
+            $insta->caption = $description;
+            $insta->imgUrl = $imgUrl;
+            $insta->message = 'N/A';
+            $insta->source = 'Instagram';
+            $insta->link = $link;
+            $insta->width = 0;
+            $insta->height = 0;
+            $insta->resize = 'fit';
+            $insta->approved = 'Pending';
+            $insta->approver_id = -1;
+            $insta->datetime_posted = $datetime_posted;
+            $insta->save();
+            echo "Saved!";
+          }
       }
+    }
+    public function getSelfInstagrams() {
+      $url ='https://api.instagram.com/v1/users/self/media/recent/?access_token='.env('INSTAGRAM_ACCESS_TOKEN');
+      $content = file_get_contents($url);
+      $json = json_decode($content, true);
+      foreach($json['data'] as $images) {
+          $imgUrl = $images['images']['standard_resolution']['url'];
+          $description = $images['caption']['text'];
+          $datetime_posted = $images['caption']['created_time'];
+          $datetime_posted = Carbon::createFromTimestamp($datetime_posted)->toDateTimeString();
+          $username = $images['caption']['from']['username'];
+          $profilePic = $images['caption']['from']['profile_picture'];
+          $link = $images['link'];
+          if (SocialMedia::where('imgUrl', $imgUrl)->exists()) {
+            echo "This post already exists";
+          }
+          else{
+            $insta = new SocialMedia;
+            $insta->username = $username;
+            $insta->profile_pic_url = $profilePic;
+            $insta->tweet = 'N/A';
+            $insta->caption = $description;
+            $insta->imgUrl = $imgUrl;
+            $insta->message = 'N/A';
+            $insta->source = 'Instagram';
+            $insta->link = $link;
+            $insta->width = 0;
+            $insta->height = 0;
+            $insta->resize = 'fit';
+            $insta->approved = 'Approved';
+            $insta->approver_id = -1;
+            $insta->datetime_posted = $datetime_posted;
+            $insta->save();
+            echo "Saved!";
+          }
+        }
     }
 
     public function getTweets() {
@@ -57,7 +95,7 @@ class SocialMediaController extends Controller
         'consumer_secret'             => env('TWITTER_CONSUMER_SECRET')
       );
       $url = 'https://api.twitter.com/1.1/search/tweets.json';
-      $getField = 'q=%23codeforamerica&result_type=recent';
+      $getField = 'q=%23ghsnd&result_type=recent';
       $requestMethod = 'GET';
       $twitter = new TwitterAPIExchange($settings);
       $content = $twitter->setGetfield($getField)
@@ -93,23 +131,27 @@ class SocialMediaController extends Controller
           if(isset($tweet_info['entities']['media'][0]['sizes']['large']['resize'])) {
             $resize = $tweet_info['entities']['media'][0]['sizes']['large']['resize'];
           }
-
-          $newTweet = new SocialMedia;
-          $newTweet->username = $username;
-          $newTweet->profile_pic_url = $profile_img;
-          $newTweet->tweet = $tweet;
-          $newTweet->caption = 'N/A';
-          $newTweet->message = 'N/A';
-          $newTweet->imgUrl = $imgUrl;
-          $newTweet->link = $link;
-          $newTweet->width = $width;
-          $newTweet->height = $height;
-          $newTweet->source = 'Twitter';
-          $newTweet->approved = 'Pending';
-          $newTweet->approver_id = -1;
-          $newTweet->datetime_posted = $datetime;
-          $newTweet->save();
-          echo "Saved!";
+          if (SocialMedia::where('imgUrl', $imgUrl)->exists()) {
+            echo "This post already exists";
+          }
+          else{
+            $newTweet = new SocialMedia;
+            $newTweet->username = $username;
+            $newTweet->profile_pic_url = $profile_img;
+            $newTweet->tweet = $tweet;
+            $newTweet->caption = 'N/A';
+            $newTweet->message = 'N/A';
+            $newTweet->imgUrl = $imgUrl;
+            $newTweet->link = $link;
+            $newTweet->width = $width;
+            $newTweet->height = $height;
+            $newTweet->source = 'Twitter';
+            $newTweet->approved = 'Pending';
+            $newTweet->approver_id = -1;
+            $newTweet->datetime_posted = $datetime;
+            $newTweet->save();
+            echo "Saved!";
+          }
       }
 
     }

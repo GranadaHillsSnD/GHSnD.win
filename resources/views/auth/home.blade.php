@@ -10,7 +10,7 @@
     border-bottom: 1px solid;
   }
   .postMedia {
-    height: 120px;
+    height: 250px;
     text-align: center;
     border: 1px solid;
   }
@@ -217,7 +217,7 @@
                     </li>
 
                     <li>
-                        <a href="/admin/"><i class="fa fa-edit fa-fw"></i> Pending</a>
+                        <a href="/admin/"><i class="fa fa-edit fa-fw"></i> Pending ({{ \DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Pending')->count() }})</a>
                         <a href="/admin/approved"><i class="fa fa-edit fa-fw"></i> Approved</a>
                         <a href="/admin/denied"><i class="fa fa-edit fa-fw"></i> Denied</a>
                     </li>
@@ -251,9 +251,9 @@
           {!! Form::submit('Approve', ['class' => 'btn btn-success']) !!}
           {!! Form::close() !!}
                         <p>Username: @<span>{{ $post->username }}</span></p>
-                        <p>Caption/Tweet: @if($post->caption)
+                        <p>Caption/Tweet: @if($post->caption != 'N/A')
                             {{ $post->caption }}
-                          @elseif($post->tweet)
+                          @elseif($post->tweet != 'N/A')
                             {{ $post->tweet }}
                           @endif
                         </p>

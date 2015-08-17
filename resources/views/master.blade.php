@@ -13,9 +13,21 @@
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cinzel">
 		<link rel="shortcut icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 		<link rel="stylesheet" href="{{ URL::asset('assets/css/main.css') }}" />
+		@yield('extra-links')
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
   <style>
+	#content {
+		background-color: #fafafa;
+	}
+	#banner {
+    width: 700px;
+    height: 200px;
+    padding-bottom: 50px;
+  }
+  .today {
+    background-color: #c94663;
+  }
   @media screen and (min-width: 737px) {
     #primaryLogo {
       display: inline-block;
@@ -89,10 +101,30 @@
 	.banner-text {
 		text-shadow: 1.5px 1.5px #707070;
 	}
+	.bottom-nav {
+		text-align: center;
+		padding-top: 2em;
+	}
+	#content {
+		background-color: #fafafa;
+	}
 
 	</style>
 	@yield('styles')
 	<body>
+		<?php
+			$first = \Carbon\Carbon::createFromFormat('Y-m-d', substr(new \Carbon\Carbon('first day of this month'), 0, 10))->dayOfWeek;
+			$last = \Carbon\Carbon::createFromFormat('Y-m-d', substr(new \Carbon\Carbon ('last day of this month'), 0, 10))->dayOfWeek;
+			$numDays = \Carbon\Carbon::today()->daysInMonth;
+			$numWeeks = (int)(($numDays - ((7 - $first) + $last + 1))/7); //did some math here
+			$carbon = [
+				'first' => $first,
+				'last' => $last,
+				'numWeeks' => $numWeeks,
+				'numDays' => $numDays,
+				'today' => (int)substr(substr(\Carbon\Carbon::today(), 0, 10), 8, 5)
+			];
+		?>
 
 		<!-- Content -->
 		<div class="title-banner">
@@ -100,38 +132,84 @@
 		</div>
 			<div id="content">
 				<div class="inner">
+					@yield('content')
+
 					@yield('banner')
 
-					@yield('articles', 'Social Media and Admin Updates')
+					@yield('articles')
 
 					@yield('pagination')
 
+					<div class="bottom-nav">
+						<ul class="special">
+							<li><a href="/staff" class="glyphicon glyphicon-sunglasses"></a></li>
+							<li><a href="/about" class="glyphicon glyphicon-user"></a></li>
+							<li><a href="/calendar" class="glyphicon glyphicon-calendar"></a></li>
+							<li><a href="/resources" class="glyphicon glyphicon-briefcase"></a></li>
+						</ul>
+					</div>
 				</div>
+
 			</div>
 
 		<!-- Sidebar -->
 			<div id="sidebar">
-
 				<!-- Logo -->
 					<h1 id="logo"><img id="primaryLogo" src="{{ URL::asset('assets/images/logofixed.png') }}"></h1>
 
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="#">Home</a></li>
-							<li><a href="#">Team Updates</a></li>
-							<li><a href="#">Recent Posts</a></li>
-							<li><a href="#">Calendar</a></li>
-							<li><a href="#">Contact</a></li>
-							<li><a href="#">About Us</a></li>
-							<li><a href"#">Resources</a></li>
+							<li class="current"><a href="/">Home</a></li>
+							<li><a href="/updates">Team Updates</a></li>
+							<li><a href="/calendar">Calendar</a></li>
+							<li><a href="/about">What We Do</a></li>
+							<li><a href="/about">Meet The Staff</a></li>
+							<li><a href="/resources">Resources</a></li>
 						</ul>
 					</nav>
 
           <!-- Calendar -->
   					<section class="box calendar">
   						<div class="inner">
-  							@yield('calendar')
+								<table>
+								  <caption>August 2015</caption>
+								  <thead>
+								    <tr>
+								      <th scope="col" title="Sunday">S</th>
+								      <th scope="col" title="Monday">M</th>
+								      <th scope="col" title="Tuesday">T</th>
+								      <th scope="col" title="Wednesday">W</th>
+								      <th scope="col" title="Thursday">T</th>
+								      <th scope="col" title="Friday">F</th>
+								      <th scope="col" title="Saturday">S</th>
+								    </tr>
+								  </thead>
+								  <tbody>
+								    <?php $count = 1; ?>
+								    <tr>
+								      <td colspan="{{ $carbon['first'] }}" class="pad"><span>&nbsp;</span></td>
+								    @for ($f = $carbon['first']; $f < 7; $f++ )
+								      <td @if($carbon['today'] == $count) class="today" @endif><span>{{$count}}</td>
+								      <?php $count++; ?>
+								    @endfor
+								    </tr>
+								    @for ($i = 1; $i <= $carbon['numWeeks']; $i++)
+								    <tr>
+								      @for ($k = 0; $k <= 6; $k++)
+								        <td @if($carbon['today'] == $count) class="today" @endif><span>{{$count}}</td>
+								        <?php $count++; ?>
+								      @endfor
+								    </tr>
+								    @endfor
+								    <tr>
+								    @for($l = $count; $l <= $carbon['numDays']; $l++)
+								      <td @if($carbon['today'] == $count) class="today" @endif><span>{{$count}}</td>
+								      <?php $count++; ?>
+								    @endfor
+								    <td class="pad" colspan="3"><span>&nbsp;</span></td>
+								  </tbody>
+								</table>
   						</div>
   					</section>
 				<!-- Search -->
@@ -152,7 +230,6 @@
 							<li><a href="#">Feugiat nisl aliquam</a></li>
 							<li><a href="#">Sed dolore magna</a></li>
 							<li><a href="#">Malesuada commodo</a></li>
-							<li><a href="#">Ipsum metus nullam</a></li>
 						</ul>
 					</section>
 
@@ -170,6 +247,7 @@
 			<script src="{{ URL::asset('assets/js/util.js') }}"></script>
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="{{ URL::asset('assets/js/main.js') }}"></script>
+			@yield('extra-scripts')
 
 	</body>
 </html>

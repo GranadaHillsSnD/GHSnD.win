@@ -27,6 +27,7 @@ class AdminController extends Controller
           return redirect('admin/login');
         }
     }
+
     public function showApproved() {
       if(\Auth::check()) {
         $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Approved')->get();
@@ -36,6 +37,7 @@ class AdminController extends Controller
         return redirect('admin/login');
       }
     }
+
     public function showDenied() {
       if(\Auth::check()) {
         $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Denied')->get();
