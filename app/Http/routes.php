@@ -21,6 +21,7 @@ Route::get('/instagram', 'SocialMediaController@getInstagrams');
 Route::get('/self', 'SocialMediaController@getSelfInstagrams');
 
 Route::get('/twitter', 'SocialMediaController@getTweets');
+Route::get('/get', 'SocialMediaController@getMyTweets');
 
 Route::get('/calendar', 'CalendarController@index');
 
