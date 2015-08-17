@@ -87,8 +87,8 @@
       -->
       <div class="username">
         <img class="profilePic" src="{{ $post->profile_pic_url }}">
-            @if($post->source == 'Instagram')<h2 class="insta-title"><i class="icon-logo fa fa-instagram"></i> @<span>{{$post->username}}</span> @endif
-            @if($post->source == 'Twitter')<h2 class="twitter-title"><i class="icon-logo fa fa-twitter"></i> @<span>{{ $post->username }}</span> @endif
+            @if($post->source == 'Instagram' || $post->source == 'Admin-Insta')<h2 class="insta-title"><i class="icon-logo fa fa-instagram"></i> @<span>{{$post->username}}</span> @endif
+            @if($post->source == 'Twitter' || $post->source == 'Admin-Twitter')<h2 class="twitter-title"><i class="icon-logo fa fa-twitter"></i> @<span>{{ $post->username }}</span> @endif
             </h2>
     </header>
     <div class="info">
@@ -113,10 +113,9 @@
     </div>
     @if($post->link != 'N/A')<a href="{{ $post->link }}" class="image featured">@if($post->imgUrl != 'N/A')<img src="{{ $post->imgUrl }}" alt=""/>@endif</a>@endif
     <p class="caption">
-      @if($post->source == 'Instagram')
+      @if($post->source == 'Instagram' || $post->source == 'Admin-Insta')
         {{ $post->caption }}
-      @endif
-      @if($post->source == 'Twitter')
+      @elseif($post->source == 'Twitter' || $post->source == 'Admin-Twitter')
         {{ $post->tweet }}
       @endif
     </p>
