@@ -195,8 +195,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => Illuminate\Html\FormFacade::class,
         'Html'      => Illuminate\Html\HtmlFacade::class,
-        'Twitter'   => j7mbo\twitter_api_php\TwitterAPIExchange::class,
-        'Calendar' => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
+        'Calendar'  => MaddHatter\LaravelFullcalendar\Facades\Calendar::class,
     ],
 
 ];

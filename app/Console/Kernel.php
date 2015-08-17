@@ -14,6 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\Inspire::class,
+        \App\Console\Commands\GetInstagrams::class,
+        \App\Console\Commands\GetTweets::class,
     ];
 
     /**
@@ -26,5 +28,9 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('inspire')
                  ->hourly();
+        $schedule->command('instagram:get')
+                 ->everyMinute();
+        $schedule->command('tweets:get')
+                 ->everyMinute();
     }
 }

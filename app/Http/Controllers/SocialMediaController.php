@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Libraries\j7mbo\twitter_api_php\TwitterAPIExchange;
+use Twitter;
 
 class SocialMediaController extends Controller
 {
@@ -73,7 +73,7 @@ class SocialMediaController extends Controller
             $insta->caption = $description;
             $insta->imgUrl = $imgUrl;
             $insta->message = 'N/A';
-            $insta->source = 'Instagram';
+            $insta->source = 'Admin-Insta';
             $insta->link = $link;
             $insta->width = 0;
             $insta->height = 0;
@@ -215,7 +215,7 @@ class SocialMediaController extends Controller
             $newTweet->link = $link;
             $newTweet->width = $width;
             $newTweet->height = $height;
-            $newTweet->source = 'Admin';
+            $newTweet->source = 'Admin-Twitter';
             $newTweet->approved = 'Approved';
             $newTweet->approver_id = -1;
             $newTweet->datetime_posted = $datetime;

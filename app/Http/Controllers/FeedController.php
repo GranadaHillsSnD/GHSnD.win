@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use Route;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -13,16 +14,15 @@ class FeedController extends Controller
 {
     public function showLatestFeed() {
       $social_media = DB::table('social_media')->where('approved', 'Approved')->orderBy('datetime_posted', 'desc')->paginate(10);
-
       return view('home', ['soc_med' => $social_media]);
     }
 
     public function showTeamUpdates() {
-      $social_media = DB::table('social_media')->where('source', 'Admin')->orderBy('datetime_posted', 'desc')->paginate(10);
+      $social_media = DB::table('social_media')->where('source', 'Admin-Twitter')->orWhere('source', 'Admin-Insta')->orWhere('source', 'Admin')->orderBy('datetime_posted', 'desc')->paginate(10);
       return view('home', ['soc_med' => $social_media]);
     }
     public function showAbout() {
-      return view('about');
+      return view('about', ['route' => '/about']);
     }
     /**
      * Display a listing of the resource.

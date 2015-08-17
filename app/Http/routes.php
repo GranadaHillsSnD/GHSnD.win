@@ -17,13 +17,15 @@ Route::get('/updates', 'FeedController@showTeamUpdates');
 
 Route::get('/about', 'FeedController@showAbout');
 
-Route::get('/instagram', 'SocialMediaController@getInstagrams');
-Route::get('/self', 'SocialMediaController@getSelfInstagrams');
-
-Route::get('/twitter', 'SocialMediaController@getTweets');
-Route::get('/get', 'SocialMediaController@getMyTweets');
-
 Route::get('/calendar', 'CalendarController@index');
+
+Route::get('/staff', function() {
+  return view('staff');
+});
+
+Route::get('/resources', function() {
+  return view('resources');
+});
 
 // Authentication routes...
 Route::get('/admin/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);

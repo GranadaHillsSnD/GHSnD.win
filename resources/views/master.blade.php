@@ -160,12 +160,13 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<ul>
-							<li class="current"><a href="/">Home</a></li>
-							<li><a href="/updates">Team Updates</a></li>
-							<li><a href="/calendar">Calendar</a></li>
-							<li><a href="/about">What We Do</a></li>
-							<li><a href="/about">Meet The Staff</a></li>
-							<li><a href="/resources">Resources</a></li>
+							<?php $route = Route::current()->uri(); ?>
+							<li @if($route == '/') class="current" @endif><a href="/">Home</a></li>
+							<li @if($route == 'updates') class="current" @endif><a href="/updates">Team Updates</a></li>
+							<li @if($route == 'calendar') class="current" @endif><a href="/calendar">Calendar</a></li>
+							<li @if($route == 'about') class="current" @endif><a href="/about">What We Do</a></li>
+							<li @if($route == 'staff') class="current" @endif><a href="/staff">Meet The Staff</a></li>
+							<li @if($route == 'resources') class="current" @endif><a href="/resources">Resources</a></li>
 						</ul>
 					</nav>
 
