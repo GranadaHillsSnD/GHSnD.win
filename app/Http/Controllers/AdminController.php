@@ -30,7 +30,7 @@ class AdminController extends Controller
 
     public function showApproved() {
       if(\Auth::check()) {
-        $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Approved')->get();
+        $social_media = DB::table('social_media')->orderBy('datetime_posted', 'desc')->where('approved', 'Approved')->get();
         return view('auth.home', ['admin' => \Auth::user(), 'soc_media' => $social_media, 'pageHeader' => 'Approved']);
       }
       else {
@@ -40,7 +40,7 @@ class AdminController extends Controller
 
     public function showDenied() {
       if(\Auth::check()) {
-        $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Denied')->get();
+        $social_media = DB::table('social_media')->orderBy('datetime_posted', 'desc')->where('approved', 'Denied')->get();
         return view('auth.home', ['admin' => \Auth::user(), 'soc_media' => $social_media, 'pageHeader' => 'Denied']);
       }
       else {
