@@ -45,35 +45,6 @@
     }
   }
 	@media screen and (min-width: 1000px) {
-		#primaryLogo {
-			padding-left: .3em;
-		}
-		.title-banner {
-			padding-bottom: 5em;
-			padding-top: 5em;
-			background-image: url(https://dl.dropboxusercontent.com/u/48479368/GHSnD/cover-photo.png);
-			background-size: cover;
-			background-position: 25% 25%;
-		}
-	}
-	@media screen and (max-width: 999px) {
-		.title-banner {
-			padding-top: 5em;
-			background-image: url(https://dl.dropboxusercontent.com/u/48479368/GHSnD/cover-photo.png);
-			background-size: cover;
-			background-position: 25% 25%;
-		}
-		.banner-text {
-			font-size: 50px;
-			color: #fff;
-			font-weight:100;
-			text-align: center;
-			padding-left: 0em;
-			line-height: 1.3em;
-			font-family: "Source Sans Pro", sans-serif;
-		}
-	}
-	@media screen and (min-width: 1000px) {
 		.banner-text {
 			font-size: 50px;
 			color: #fff;
