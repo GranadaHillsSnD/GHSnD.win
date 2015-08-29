@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Goutte\Client;
+use Calendar;
+use DB;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Goutte;
+use App\CalendarEvents;
 
 function sanitize($str) {
   $str = str_replace(chr(194)," ", $str);
@@ -46,7 +49,8 @@ class CalendarController extends Controller
      */
     public function index()
     {
-        return view('calendar');
+      $calendarEvents = DB::table('calendar_events')->orderBy('start', 'asc')->get();
+      return view('calendar', ['calendarEvents' => $calendarEvents]);
     }
 
     /**
@@ -56,7 +60,7 @@ class CalendarController extends Controller
      */
     public function create()
     {
-        //
+      //
     }
 
     /**
@@ -67,7 +71,25 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $event = new CalendarEvents;
+      $event->title = $request->input('title');
+      if($request->input('all_day') != 1) {
+        $event->all_day = 0;
+        $date_start = $request->input('start-date')." ".$request->input('start-time');
+        $event->start = $date_start;
+        $date_end = $request->input('end-date')." ".$request->input('end-time');
+        $event->end = $date_end;
+      }
+      else {
+        $event->all_day = $request->input('all_day');
+        $date_start = $request->input('start-date')." 00:00:00";
+        $event->start = $date_start;
+        $date_end = $request->input('end-date')." 00:00:00";
+        $event->end = $date_end;
+      }
+      $event->save();
+      $request->session()->flash('added', 'Event Added.');
+      return view('auth.calendar');
     }
 
     /**

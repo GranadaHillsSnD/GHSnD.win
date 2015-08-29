@@ -47,6 +47,15 @@ class AdminController extends Controller
         return redirect('admin/login');
       }
     }
+    public function addEvent()
+    {
+      if(\Auth::check()) {
+        return view('auth.calendar');
+      }
+      else {
+        return redirect('admin/login');
+      }
+    }
 
     /**
      * Show the form for creating a new resource.

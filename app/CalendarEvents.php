@@ -8,14 +8,60 @@ class CalendarEvents extends Model
 {
   protected $table = 'calendar_events';
 
-  protected $primaryKey = 'cal_event_id';
+  protected $primaryKey = 'event_id';
 
-  protected $fillable = ['event_title',
-                      'event_start', 'event_end',
-                      'address1', 'address2', 'city', 'state', 'zip',
-                      'contact', 'contact_phone', 'contact_email',
-                      'description',
-                      'file1_name', 'file2_name', 'file3_name', 'file4_name', 'file5_name',
-                      'file1', 'file2', 'file3', 'file4', 'file5',
+  protected $fillable = ['title', 'all_day',
+                      'start', 'end', 'url',
                       'updated_at', 'created_at'];
+
+  protected $dates = ['start', 'end'];
+
+  /**
+   * Get the event's id number
+   *
+   * @return int
+   */
+  public function getId() {
+      return $this->id;
+  }
+
+  /**
+   * Get the event's title
+   *
+   * @return string
+   */
+  public function getTitle()
+  {
+      return $this->title;
+  }
+
+  /**
+   * Is it an all day event?
+   *
+   * @return bool
+   */
+  public function isAllDay()
+  {
+      return (bool)$this->all_day;
+  }
+
+  /**
+   * Get the start time
+   *
+   * @return DateTime
+   */
+  public function getStart()
+  {
+      return $this->start;
+  }
+
+  /**
+   * Get the end time
+   *
+   * @return DateTime
+   */
+  public function getEnd()
+  {
+      return $this->end;
+  }
 }

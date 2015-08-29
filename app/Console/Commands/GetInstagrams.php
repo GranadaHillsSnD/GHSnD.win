@@ -50,7 +50,7 @@ class GetInstagrams extends Command
           $username = $images['caption']['from']['username'];
           $profilePic = $images['caption']['from']['profile_picture'];
           $link = $images['link'];
-          if (SocialMedia::where('imgUrl', $imgUrl)->exists()) {
+          if (SocialMedia::where('caption', $description)->exists()) {
             echo "This post already exists";
           }
           else{
@@ -86,10 +86,10 @@ class GetInstagrams extends Command
 			  $username = $images['caption']['from']['username'];
 			  $profilePic = $images['caption']['from']['profile_picture'];
 			  $link = $images['link'];
-			  if (SocialMedia::where('imgUrl', $imgUrl)->exists()) {
-				echo "This post already exists";
+			  if (SocialMedia::where('caption', $description)->exists()) {
+				  echo "This post already exists";
 			  }
-			  else{
+			  else {
 				$insta = new SocialMedia;
 				$insta->username = $username;
 				$insta->profile_pic_url = $profilePic;

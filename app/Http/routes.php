@@ -27,6 +27,9 @@ Route::get('/resources', function() {
   return view('resources');
 });
 
+Route::get('/admin/calendar', 'AdminController@addEvent');
+Route::post('/admin/calendar', 'CalendarController@store');
+
 // Authentication routes...
 Route::get('/admin/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/admin/login', ['as' => 'auth.login', 'uses' =>'Auth\AuthController@postLogin']);

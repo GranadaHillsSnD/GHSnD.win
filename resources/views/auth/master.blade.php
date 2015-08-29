@@ -22,6 +22,7 @@
 
     <!-- Custom Fonts -->
     <link href="{{ URL::asset('assets/admin/bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    @yield('stylesheets')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,7 +34,7 @@
 </head>
 @yield('style')
 <body>
-    @yield('content')
+    @yield('login')
 </body>
 <!-- jQuery -->
 <script src="{{ URL::asset('assets/admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
@@ -45,5 +46,6 @@
 <script src="{{ URL::asset('assets/admin/bower_components/metisMenu/dist/metisMenu.min.js') }}"></script>
 
 <!-- Custom Theme JavaScript -->
-<script src="../dist/js/sb-admin-2.js"></script>
+<script src="{{ URL::asset('assets/admin/dist/js/sb-admin-2.js') }}"></script>
+@yield('scripts')
 </html>

@@ -12,7 +12,7 @@
 		font-size: 14px;
 	}
 
-	#calendar {
+	#calendar, .events {
 		background-color: #fff;
 		border-radius: 3px;
 		margin-bottom: 60px;
@@ -23,14 +23,27 @@
 		padding: 1em 3em 1em 3em;
 		margin-bottom: 2.5em;
 	}
+	.events h1 {
+		font-size: 50px;
+		line-height: 50px;
+		text-align: center;
+		padding-bottom: 1em;
+	}
 
 </style>
 @stop
 
 @section('content')
   <div id='calendar'></div>
-	<div>
-
+	<div class="events">
+		<h1>Calendar Events</h1>
+		<div>
+			@foreach($calendarEvents as $event)
+				<div>
+					<span class="">{{$event->title}}</span> <span class="pull-right">{{ date('l, F d Y @ h:i:s a', strtotime($event->start)) }}</span>
+				</div>
+			@endforeach
+		</div>
 	</div>
 @stop
 
@@ -43,67 +56,26 @@
 	$(document).ready(function() {
 
 		$('#calendar').fullCalendar({
-			defaultDate: '2015-02-12',
 			editable: true,
 			eventLimit: true, // allow "more" link when too many events
 			events: [
+			@foreach($calendarEvents as $event)
+				@if($event->all_day == 1)
 				{
-					title: 'All Day Event',
-					start: '2015-02-01'
+					title: '{{ $event->title }}',
+					start: "{{ substr($event->start, 0, 10) }}",
+					end: "{{ substr($event->end, 0, 10) }}"
 				},
+				@else
 				{
-					title: 'Long Event',
-					start: '2015-02-07',
-					end: '2015-02-10'
+					title: '{{ $event->title }}',
+					start: "{{ str_replace(' ', 'T', $event->start) }}",
+					end: "{{ str_replace(' ', 'T', $event->end) }}"
 				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2015-02-09T16:00:00'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: '2015-02-16T16:00:00'
-				},
-				{
-					title: 'Conference',
-					start: '2015-02-11',
-					end: '2015-02-13'
-				},
-				{
-					title: 'Meeting',
-					start: '2015-02-12T10:30:00',
-					end: '2015-02-12T12:30:00'
-				},
-				{
-					title: 'Lunch',
-					start: '2015-02-12T12:00:00'
-				},
-				{
-					title: 'Meeting',
-					start: '2015-02-12T14:30:00'
-				},
-				{
-					title: 'Happy Hour',
-					start: '2015-02-12T17:30:00'
-				},
-				{
-					title: 'Dinner',
-					start: '2015-02-12T20:00:00'
-				},
-				{
-					title: 'Birthday Party',
-					start: '2015-02-13T07:00:00'
-				},
-				{
-					title: 'Click for Google',
-					url: 'http://google.com/',
-					start: '2015-02-28'
-				}
-			]
-		});
-
+				@endif
+			@endforeach
+						]
+			});
 	});
 
 </script>
