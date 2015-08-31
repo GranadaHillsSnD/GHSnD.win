@@ -15,7 +15,7 @@
             <div class="col-lg-12 div-form">
               <div class="">
                 {!! Form::label('Post Event') !!}
-                {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'content', 'placeholder' => 'Post Content']) !!}
+                {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'content', 'placeholder' => 'Post Content', 'maxlength' => 10000]) !!}
               </div>
             </div>
             <div class="col-lg-12">
