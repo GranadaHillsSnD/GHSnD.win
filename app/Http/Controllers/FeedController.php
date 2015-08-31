@@ -18,7 +18,7 @@ class FeedController extends Controller
     }
 
     public function showTeamUpdates() {
-      $social_media = DB::table('social_media')->where('source', 'Admin-Twitter')->orWhere('source', 'Admin-Insta')->orWhere('source', 'Admin')->orderBy('datetime_posted', 'desc')->paginate(10);
+      $social_media = DB::table('social_media')->where('source', 'Admin-Twitter')->orWhere('source', 'Admin-Insta')->orWhere('source', 'Admin-Post')->orderBy('datetime_posted', 'desc')->paginate(10);
       return view('home', ['soc_med' => $social_media]);
     }
     public function showAbout() {

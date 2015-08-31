@@ -56,8 +56,10 @@
   }
   @media screen and (max-width: 999px) {
     .post-excerpt {
-      border-bottom: solid 1px #ddd;
       text-align: center;
+    }
+    .post {
+      border-bottom: solid 1px #ddd;
     }
   }
   .twitter-title {
@@ -72,12 +74,46 @@
   .fa-instagram {
     padding-right: 15px;
   }
+  .message {
+    padding: 1em 2em 1em 2em;
+  }
+  .message-username {
+    text-align: center;
+  }
+  .message-username h2{
+    line-height: 24px;
+  }
+  div.message ul {
+    list-style: disc;
+  }
 </style>
 @stop
 
 @section('articles')
 <!-- Post -->
   @foreach($soc_med as $post)
+  @if($post->source == 'Admin-Post')
+  <article class="box post">
+    <div class="message-username username">
+      <img class="profilePic" src="{{ $post->profile_pic_url }}">
+      <div class="info">
+        <!--
+          Note: The date should be formatted exactly as it's shown below. In particular, the
+          "least significant" characters of the month should be encapsulated in a <span>
+          element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
+          Oh, and if you don't need a date for a particular page or post you can simply delete
+          the entire "date" element.
+
+        -->
+        <span class="date">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->datetime_posted)->diffForHumans() }}
+      </div>
+      <h2>From {{ $post->username }}</h2>
+    </div>
+    <div class="message">
+        {!! $post->message !!}
+    <div>
+  </article>
+  @else
   <article class="box post post-excerpt">
     <header>
       <!--
@@ -85,41 +121,42 @@
         if they get too long. You can also remove the <p> entirely if you don't
         need a subtitle.
       -->
-      <div class="username">
-        <img class="profilePic" src="{{ $post->profile_pic_url }}">
-            @if($post->source == 'Instagram' || $post->source == 'Admin-Insta')<h2 class="insta-title"><i class="icon-logo fa fa-instagram"></i> @<span>{{$post->username}}</span> @endif
-            @if($post->source == 'Twitter' || $post->source == 'Admin-Twitter')<h2 class="twitter-title"><i class="icon-logo fa fa-twitter"></i> @<span>{{ $post->username }}</span> @endif
-            </h2>
-    </header>
-    <div class="info">
-      <!--
-        Note: The date should be formatted exactly as it's shown below. In particular, the
-        "least significant" characters of the month should be encapsulated in a <span>
-        element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
-        Oh, and if you don't need a date for a particular page or post you can simply delete
-        the entire "date" element.
+        <div class="username">
+          <img class="profilePic" src="{{ $post->profile_pic_url }}">
+              @if($post->source == 'Instagram' || $post->source == 'Admin-Insta')<h2 class="insta-title"><i class="icon-logo fa fa-instagram"></i> @<span>{{$post->username}}</span> @endif
+              @if($post->source == 'Twitter' || $post->source == 'Admin-Twitter')<h2 class="twitter-title"><i class="icon-logo fa fa-twitter"></i> @<span>{{ $post->username }}</span> @endif
+              </h2>
+        </header>
+        <div class="info">
+          <!--
+            Note: The date should be formatted exactly as it's shown below. In particular, the
+            "least significant" characters of the month should be encapsulated in a <span>
+            element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
+            Oh, and if you don't need a date for a particular page or post you can simply delete
+            the entire "date" element.
 
-      -->
-      <span class="date">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->datetime_posted)->diffForHumans() }}
-      <!--
-        Note: You can change the number of list items in "stats" to whatever you want.
-      -->
-      <ul class="stats">
-        <li><a href="#" class="icon fa-comment">16</a></li>
-        <li><a href="#" class="icon fa-heart">32</a></li>
-        <li><a href="#" class="icon fa-twitter">64</a></li>
-        <li><a href="#" class="icon fa-facebook">128</a></li>
-      </ul>
-    </div>
-    @if($post->link != 'N/A')<a href="{{ $post->link }}" class="image featured">@if($post->imgUrl != 'N/A')<img src="{{ $post->imgUrl }}" alt=""/>@endif</a>@endif
-    <p class="caption">
-      @if($post->source == 'Instagram' || $post->source == 'Admin-Insta')
-        {{ $post->caption }}
-      @elseif($post->source == 'Twitter' || $post->source == 'Admin-Twitter')
-        {{ $post->tweet }}
-      @endif
-    </p>
+          -->
+          <span class="date">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->datetime_posted)->diffForHumans() }}
+          <!--
+            Note: You can change the number of list items in "stats" to whatever you want.
+          -->
+          <ul class="stats">
+            <li><a href="#" class="icon fa-comment">16</a></li>
+            <li><a href="#" class="icon fa-heart">32</a></li>
+            <li><a href="#" class="icon fa-twitter">64</a></li>
+            <li><a href="#" class="icon fa-facebook">128</a></li>
+          </ul>
+        </div>
+        @if($post->link != 'N/A')<a href="{{ $post->link }}" class="image featured">@if($post->imgUrl != 'N/A')<img src="{{ $post->imgUrl }}" alt=""/>@endif</a>@endif
+        <p class="caption">
+          @if($post->source == 'Instagram' || $post->source == 'Admin-Insta')
+            {{ $post->caption }}
+          @elseif($post->source == 'Twitter' || $post->source == 'Admin-Twitter')
+            {{ $post->tweet }}
+          @endif
+        </p>
   </article>
+  @endif
   @endforeach
 
 @stop
