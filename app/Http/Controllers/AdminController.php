@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use App\Admins;
+use App\SocialMedia;
 use DB;
 use App\Http\Controllers\Auth;
 
@@ -55,6 +56,37 @@ class AdminController extends Controller
       else {
         return redirect('admin/login');
       }
+    }
+
+    public function addPost() {
+      if(\Auth::check()) {
+        return view('auth.post');
+      }
+      else {
+        return redirect('admin/login');
+      }
+    }
+
+    public function storePost(Request $request) {
+      $post = new SocialMedia;
+      $post->username = \Auth::user()->name;
+      $post->profile_pic_url = 'http://ghsnd.win/assets/images/logofixed.png';
+      $post->tweet = 'N/A';
+      $post->caption = 'N/A';
+      $post->imgUrl = 'N/A';
+      $post->message = $request->input('content');
+      $post->source = 'Admin-Post';
+      $post->link = 'N/A';
+      $post->width = 'N/A';
+      $post->height = 'N/A';
+      $post->resize = 'N/A';
+      $post->approved = 'Approved';
+      $post->approver_id = \Auth::user()->admin_id;
+      $post->datetime_posted = \Carbon\Carbon::now();
+      $post->save();
+      $request->session()->flash('added-post', 'Post Added.');
+      return view('auth.post');
+
     }
 
     /**

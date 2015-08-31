@@ -190,6 +190,8 @@
                       <a href="/admin/"><i class="fa fa-edit fa-fw"></i> Pending ({{ \DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Pending')->count() }})</a>
                       <a href="/admin/approved"><i class="fa fa-edit fa-fw"></i> Approved</a>
                       <a href="/admin/denied"><i class="fa fa-edit fa-fw"></i> Denied</a>
+                      <a href="/admin/post"><i class="fa fa-edit fa-fw"></i> New Post</a>
+                      <a href="/admin/post/edit"><i class="fa fa-edit fa-fw"></i> Edit a Post</a>
                       <a href="/admin/calendar"><i class="fa fa-edit fa-fw"></i> Add Event</a>
                   </li>
               </ul>
