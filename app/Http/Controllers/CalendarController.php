@@ -49,7 +49,7 @@ class CalendarController extends Controller
      */
     public function index()
     {
-      $calendarEvents = DB::table('calendar_events')->orderBy('start', 'asc')->get();
+      $calendarEvents = DB::table('calendar_events')->where('start','>=', \Carbon\Carbon::today())->orderBy('start', 'asc')->get();
       return view('calendar', ['calendarEvents' => $calendarEvents]);
     }
 
