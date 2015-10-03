@@ -185,30 +185,32 @@
   						</div>
   					</section>
 				<!-- Search -->
-					<section class="box search">
+					<!-- <section class="box search">
 						<form method="post" action="#">
 							<input type="text" class="text" name="search" placeholder="Search" />
 						</form>
-					</section>
+					</section> -->
 
 
 				<!-- Recent Posts -->
 					<section class="box recent-posts">
 						<header>
-							<h2>Recent Posts</h2>
+							<h2>Upcoming Events</h2>
 						</header>
 						<ul>
-							<li><a href="#">Lorem ipsum dolor</a></li>
-							<li><a href="#">Feugiat nisl aliquam</a></li>
-							<li><a href="#">Sed dolore magna</a></li>
-							<li><a href="#">Malesuada commodo</a></li>
+							<?php $calendarEvents = DB::table('calendar_events')->where('start','>=', \Carbon\Carbon::today())->orderBy('start', 'asc')->get(); ?>
+							@foreach($calendarEvents as $event)
+								<li><a href="/calendar">{{$event->title}}</a></li>
+							@endforeach
 						</ul>
 					</section>
 
 
 				<!-- Copyright -->
 					<ul id="copyright">
-						<li>&copy; GHCHS Speech &amp; Debate.</li><li>Design: Cory Cunanan</a></li>
+						<li>&copy; GHCHS Speech &amp; Debate.</li>
+						<li>Designed By: Cory Cunanan</li>
+						<li><a href="http://kevincunanan.com">Engineered By: Kevin Cunanan</a></li>
 					</ul>
 
 			</div>
