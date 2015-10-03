@@ -198,7 +198,7 @@
 							<h2>Upcoming Events</h2>
 						</header>
 						<ul>
-							<?php $calendarEvents = DB::table('calendar_events')->where('start','>=', \Carbon\Carbon::today())->orderBy('start', 'asc')->get(); ?>
+							<?php $calendarEvents = DB::table('calendar_events')->where('start','>=', \Carbon\Carbon::today())->orderBy('start', 'asc')->take(5)->get(); ?>
 							@foreach($calendarEvents as $event)
 								<li><a href="/calendar">{{$event->title}}</a></li>
 							@endforeach
