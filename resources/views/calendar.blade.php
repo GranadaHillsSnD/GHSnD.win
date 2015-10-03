@@ -40,7 +40,7 @@
 		<div>
 			@foreach($calendarEvents as $event)
 				<div>
-					<span class="">{{$event->title}}</span> <span class="pull-right">{{ date('l, F d Y @ h:i:s a', strtotime($event->start)) }}</span>
+					<span class="">{{$event->title}}</span> <span class="pull-right">{{ date('l, F d Y @ h:i a', strtotime($event->start)) }}</span>
 				</div>
 			@endforeach
 		</div>
