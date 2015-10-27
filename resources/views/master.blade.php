@@ -137,7 +137,7 @@
 							<li @if($route == 'calendar') class="current" @endif><a href="/calendar">Calendar</a></li>
 							<li @if($route == 'about') class="current" @endif><a href="/about">What We Do</a></li>
 							<li @if($route == 'staff') class="current" @endif><a href="/staff">Meet The Staff</a></li>
-							<li @if($route == 'resources') class="current" @endif><a href="/resources">Resources</a></li>
+							<li @if($route == 'apparel') class="current" @endif><a href="/apparel">Apparel</a></li>
 						</ul>
 					</nav>
 
