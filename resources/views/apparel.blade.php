@@ -79,7 +79,9 @@
         <span class="half"><img class="apparel" src="{{ URL::asset('assets/images/apparel/sweater-front.png') }}"></img></span>
         <span class="half"><img class="apparel" src="{{ URL::asset('assets/images/apparel/sweater-back.png') }}"></img></span>
       </div>
-      <h2 class="price">$35</h2>
+      <h2 class="price">Sweatshirt (empty): $35</h2>
+      <h2 class="price">Sweatshirt (1 Line Personalization): $40</h2>
+      <h2 class="price">Sweatshirt (2 Line Personalization): $45</h2>
   </div>
 </div>
 @stop
