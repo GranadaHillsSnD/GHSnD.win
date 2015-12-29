@@ -31,9 +31,7 @@
       margin-top: 2em;
     }
     .apparel {
-      text-align: justify;
-      -moz-text-align-last: justify;
-      text-align-last: justify;
+      text-align: center;
       height: auto;
     }
     .half {
@@ -62,8 +60,8 @@
 <div class="big-info">
   <div class="card apparel form">
       <h2>GHCHS Apparel Order Form!</h2>
-        <p>Download this form and bring it to B12.</p>
-        <a target="_blank" href="{{ URL::asset('assets/images/apparel/ApparelOrderForm.pdf') }}">Here</a>
+        <p>Download this form and bring this and your payment to the Student Store.</p>
+        <a target="_blank" href="{{ URL::asset('assets/images/apparel/ApparelOrderForm.pdf') }}">GHCHS Speech and Debate Apparel Form</a>
   </div>
   <div class="card apparel">
       <h2>T-Shirt</h2>

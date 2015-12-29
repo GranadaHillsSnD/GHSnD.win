@@ -136,7 +136,7 @@
             the entire "date" element.
 
           -->
-          <span class="date">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->datetime_posted)->diffForHumans() }}
+          <span class="date">{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $post->datetime_posted)->diffForHumans() }}</span>
           <!--
             Note: You can change the number of list items in "stats" to whatever you want.
           -->
