@@ -10,7 +10,8 @@
         "fabpot/goutte": "^3.1",
         "illuminate/html": "^5.0",
         "maddhatter/laravel-fullcalendar": "^1.2",
-        "j7mbo/twitter-api-php": "^1.0"
+        "j7mbo/twitter-api-php": "^1.0",
+        "sendgrid/sendgrid": "~4.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

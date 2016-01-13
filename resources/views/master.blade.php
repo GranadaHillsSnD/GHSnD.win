@@ -79,6 +79,13 @@
 	#content {
 		background-color: #fafafa;
 	}
+	.subscriber {
+		padding-top: 2em;
+		text-align: center;
+	}
+	.subscriber-button {
+		margin-top: 0.5em;
+	}
 
 	</style>
 	@yield('styles')
@@ -140,6 +147,17 @@
 							<li @if($route == 'apparel') class="current" @endif><a href="/apparel">Apparel</a></li>
 						</ul>
 					</nav>
+					<!-- Subscribe -->
+					<div class="subscriber">
+						@if (Session::has('name'))
+							<p>You're signed up!</p>
+						@else
+							{!! Form::open(['id' => 'post-form', 'route' => 'subscribe.success']) !!}
+								<input type="email" name="email" placeholder="Subscribe!">
+								{!! Form::submit('Submit', ['class' => 'subscriber-button']) !!}
+							{!! Form::close() !!}
+						@endif
+					</div>
 
           <!-- Calendar -->
   					<section class="box calendar">

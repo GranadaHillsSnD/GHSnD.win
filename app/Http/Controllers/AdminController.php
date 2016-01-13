@@ -7,6 +7,7 @@ use App\Admins;
 use App\SocialMedia;
 use DB;
 use App\Http\Controllers\Auth;
+use Mail;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -85,6 +86,15 @@ class AdminController extends Controller
       $post->datetime_posted = \Carbon\Carbon::now();
       $post->save();
       $request->session()->flash('added-post', 'Post Added.');
+      $subscribers = DB::table('subscribers')->get();
+      foreach($subscribers as $subscriber) {
+        Mail::raw($post->username." has posted a new announcement. To see it, please go to http://ghsnd.win to see it.", function($message) use($subscriber, $post)
+        {
+          $message->from('team@ghsnd.win', 'GHSnD');
+
+          $message->to($subscriber->email, 'Team')->subject('New Announcement');
+        });
+      }
       return view('auth.post');
 
     }
