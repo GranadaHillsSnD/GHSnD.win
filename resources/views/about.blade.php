@@ -31,11 +31,6 @@
       margin-bottom: 3em;
       margin-top: 2em;
     }
-    .about {
-      text-align: justify;
-      -moz-text-align-last: justify;
-      text-align-last: justify;
-    }
   </style>
 @stop
 

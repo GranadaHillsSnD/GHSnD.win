@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subscribers;
+use Mail;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -43,12 +44,40 @@ class SubscriberController extends Controller
         return redirect('/');
       }
       else {
+        $code = str_random(30);
         $subscriber = new Subscribers;
         $subscriber->email = $request->input('email');
+        $subscriber->code = $code;
+
+        Mail::send('email.verify', ['code' => $code], function($message) use($subscriber) {
+          $message->from('team@ghsnd.win', 'Granada Hills Speech & Debate');
+          $message->subject('Welcome to GHSnD!');
+          $message->to($subscriber->email);
+        });
+
         $subscriber->save();
-        $request->session()->flash('name', "Thanks for subscribing, ".$subscriber->name);
+
+        $request->session()->flash('name', "Thanks for subscribing");
         return redirect('/');
       }
+    }
+
+    public function confirm($confirmation_code) {
+      if(!$confirmation_code) {
+        throw new InvalidConfirmationCodeException;
+      }
+
+      $subscriber = Subscribers::where('code', $confirmation_code)->first();
+
+      if (!$subscriber) {
+        throw new InvalidConfirmationCodeException;
+      }
+
+      $subscriber->confirmed = 1;
+      $subscriber->code = null;
+      $subscriber->save();
+
+      return redirect('/')->with('confirmed', 'Successfully confirmed email!');
     }
 
     /**

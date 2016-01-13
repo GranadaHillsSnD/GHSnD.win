@@ -86,13 +86,13 @@ class AdminController extends Controller
       $post->datetime_posted = \Carbon\Carbon::now();
       $post->save();
       $request->session()->flash('added-post', 'Post Added.');
-      $subscribers = DB::table('subscribers')->get();
+      $subscribers = DB::table('subscribers')->where('confirmed', 1)->get();
       foreach($subscribers as $subscriber) {
-        Mail::raw($post->username." has posted a new announcement. To see it, please go to http://ghsnd.win to see it.", function($message) use($subscriber, $post)
+        Mail::send('email.announcement', ['admin' => $post->username, 'post' => $post->message], function($message) use($subscriber, $post)
         {
           $message->from('team@ghsnd.win', 'GHSnD');
 
-          $message->to($subscriber->email, 'Team')->subject('New Announcement');
+          $message->to($subscriber->email, 'The Team')->subject('New Announcement from '.$post->username);
         });
       }
       return view('auth.post');

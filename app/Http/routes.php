@@ -32,6 +32,11 @@ Route::get('/apparel', function() {
 });
 
 Route::post('/subscribe', ['as' => 'subscribe.success', 'uses' => 'SubscriberController@store']);
+
+Route::get('verify/{confirmationCode}', [
+    'as' => 'confirmation_path',
+    'uses' => 'SubscriberController@confirm'
+]);
 // Authentication routes...
 Route::get('/admin/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/admin/login', ['as' => 'auth.login', 'uses' =>'Auth\AuthController@postLogin']);

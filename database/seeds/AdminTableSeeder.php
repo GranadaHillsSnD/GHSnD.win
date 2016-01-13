@@ -26,7 +26,7 @@ class AdminTableSeeder extends Seeder
       Admins::create([
         'name' => 'Vikas Chauhan',
         'email' => 'v27539@student.ghchs.com',
-        'password' => bcrypt('droppedmycase')
+        'password' => bcrypt('gobigorgohome')
       ]);
     }
 }
