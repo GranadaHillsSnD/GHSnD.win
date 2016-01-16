@@ -86,11 +86,37 @@
   div.message ul {
     list-style: disc;
   }
+  .flash {
+    text-align: center;
+    text-decoration: underline;
+  }
 </style>
 @stop
 
 @section('articles')
 <!-- Post -->
+  @if (Session::has('email'))
+    <article class="box post">
+      <div class="message-username username">
+        <img class="profilePic" src="{{ URL::asset('assets/images/email-icon.png') }}">
+        <div class="info">
+          <!--
+            Note: The date should be formatted exactly as it's shown below. In particular, the
+            "least significant" characters of the month should be encapsulated in a <span>
+            element to denote what gets dropped in 1200px mode (eg. the "uary" in "January").
+            Oh, and if you don't need a date for a particular page or post you can simply delete
+            the entire "date" element.
+
+          -->
+          <span class="date">{{ \Carbon\Carbon::now()->diffForHumans() }}
+        </div>
+        <h2>From Granada Hills Speech & Debate</h2>
+      </div>
+      <div class="flash">
+          <h3>{{ Session::get('email') }}</h3>
+      <div>
+    </article>
+  @endif
   @foreach($soc_med as $post)
   @if($post->source == 'Admin-Post')
   <article class="box post">

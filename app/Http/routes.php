@@ -37,6 +37,11 @@ Route::get('verify/{confirmationCode}', [
     'as' => 'confirmation_path',
     'uses' => 'SubscriberController@confirm'
 ]);
+
+Route::get('unsubscribe/{unsubscribeCode}', [
+    'as' => 'unsubscribe_path',
+    'uses' => 'SubscriberController@unsubscribe'
+]);
 // Authentication routes...
 Route::get('/admin/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/admin/login', ['as' => 'auth.login', 'uses' =>'Auth\AuthController@postLogin']);

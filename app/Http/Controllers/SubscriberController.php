@@ -37,17 +37,44 @@ class SubscriberController extends Controller
      * @param  Request  $request
      * @return Response
      */
+
+    public function unsubscribe($unsubscribe_code) {
+      if(!$unsubscribe_code) {
+        throw new InvalidConfirmationCodeException;
+      }
+
+      $subscriber = Subscribers::where('unsubscribe', $unsubscribe_code)->first();
+
+      if (!$subscriber) {
+        throw new InvalidConfirmationCodeException;
+      }
+
+      $subscriber->confirmed = 0;
+      $subscriber->code = null;
+      $subscriber->save();
+
+      return redirect('/')->with('email', 'Successfully unsubscribed from Speech & Debate news!');
+    }
+
     public function store(Request $request)
     {
-      if(Subscribers::where('email', '=', $request->input('email'))->exists()) {
-        $request->session()->flash('name', 'This email is already subscribed');
+      if(Subscribers::where('email', $request->input('email'))->exists()) {
+        $request->session()->flash('email', 'This email is already subscribed');
         return redirect('/');
       }
       else {
         $code = str_random(30);
+        while(Subscribers::where('code', $code)->exists()) {
+          $code = str_random(30);
+        }
+        $unsubscribe = str_random(45);
+        while(Subscribers::where('unsubscribe', $unsubscribe)->exists()) {
+          $unsubscribe = str_random(45);
+        }
         $subscriber = new Subscribers;
         $subscriber->email = $request->input('email');
         $subscriber->code = $code;
+        $subscriber->unsubscribe = $unsubscribe;
 
         Mail::send('email.verify', ['code' => $code], function($message) use($subscriber) {
           $message->from('team@ghsnd.win', 'Granada Hills Speech & Debate');
@@ -57,7 +84,7 @@ class SubscriberController extends Controller
 
         $subscriber->save();
 
-        $request->session()->flash('name', "Thanks for subscribing");
+        $request->session()->flash('email', "Thanks for subscribing");
         return redirect('/');
       }
     }
@@ -77,7 +104,7 @@ class SubscriberController extends Controller
       $subscriber->code = null;
       $subscriber->save();
 
-      return redirect('/')->with('confirmed', 'Successfully confirmed email!');
+      return redirect('/')->with('email', 'Successfully confirmed email!');
     }
 
     /**

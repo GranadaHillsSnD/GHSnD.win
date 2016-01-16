@@ -88,7 +88,7 @@ class AdminController extends Controller
       $request->session()->flash('added-post', 'Post Added.');
       $subscribers = DB::table('subscribers')->where('confirmed', 1)->get();
       foreach($subscribers as $subscriber) {
-        Mail::send('email.announcement', ['admin' => $post->username, 'post' => $post->message], function($message) use($subscriber, $post)
+        Mail::send('email.announcement', ['admin' => $post->username, 'post' => $post->message, 'code' => $subscriber->unsubscribe], function($message) use($subscriber, $post)
         {
           $message->from('team@ghsnd.win', 'GHSnD');
 

@@ -149,12 +149,12 @@
 					</nav>
 					<!-- Subscribe -->
 					<div class="subscriber">
-						@if (Session::has('name'))
-							<p>You're signed up!</p>
+						@if (Session::has('email'))
+							<p>{{ Session::get('email') }}</p>
 						@else
 							{!! Form::open(['id' => 'post-form', 'route' => 'subscribe.success']) !!}
-								<input type="email" name="email" placeholder="Subscribe!">
-								{!! Form::submit('Submit', ['class' => 'subscriber-button']) !!}
+								<input type="email" name="email" placeholder="Email Address">
+								{!! Form::submit('Subscribe', ['class' => 'subscriber-button']) !!}
 							{!! Form::close() !!}
 						@endif
 					</div>

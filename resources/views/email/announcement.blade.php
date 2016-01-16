@@ -11,4 +11,7 @@
         </div>
         {!! $post !!}
     </body>
+    <footer>
+      <p><a href="{{ URL::to('unsubscribe/' . $code) }}">Unsubscribe</a></p>
+    </footer>
 </html>

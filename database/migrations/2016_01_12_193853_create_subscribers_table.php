@@ -17,6 +17,7 @@ class CreateSubscribersTable extends Migration
           $table->string('email')->unique();
           $table->boolean('confirmed')->default(0);
           $table->string('code')->nullable();
+          $table->string('unsubscribe');
           $table->timestamps();
       });
     }
