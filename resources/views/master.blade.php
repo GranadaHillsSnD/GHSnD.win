@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cinzel">
-		<link rel="shortcut icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+		<link rel="shortcut icon" type="image/png" sizes="16x16" href="favicon.png">
 		<link rel="stylesheet" href="{{ URL::asset('assets/css/main.css') }}" />
 		@yield('extra-links')
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
