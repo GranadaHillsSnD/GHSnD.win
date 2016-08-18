@@ -48,16 +48,16 @@ class GetInstagrams extends Command
           $description = $images['caption']['text'];
           $datetime_posted = $images['caption']['created_time'];
           $datetime_posted = Carbon::createFromTimestamp($datetime_posted)->toDateTimeString();
-          $username = $images['caption']['from']['username'];
-          $profilePic = $images['caption']['from']['profile_picture'];
+          $username = $images['user']['username'];
+          $profilePic = $images['user']['profile_picture'];
           $link = $images['link'];
           if (SocialMedia::where('insta_id', $insta_id)->exists()) {
             echo "This post already exists";
           }
           else{
             $insta = new SocialMedia;
-            $insta->insta_id = $insta_id;
             $insta->username = $username;
+            $insta->insta_id = $insta_id;
             $insta->profile_pic_url = $profilePic;
             $insta->tweet = 'N/A';
             $insta->caption = $description;
@@ -76,41 +76,41 @@ class GetInstagrams extends Command
           }
         }
 
-		  $tag = 'ghsnd';
-		  $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.env('INSTAGRAM_CLIENT_ID');
-		  $content = file_get_contents($url);
-		  $json = json_decode($content, true);
-		  foreach($json['data'] as $images) {
-			  $imgUrl = $images['images']['standard_resolution']['url'];
-			  $description = $images['caption']['text'];
-			  $datetime_posted = $images['caption']['created_time'];
-			  $datetime_posted = Carbon::createFromTimestamp($datetime_posted)->toDateTimeString();
-			  $username = $images['caption']['from']['username'];
-			  $profilePic = $images['caption']['from']['profile_picture'];
-			  $link = $images['link'];
-			  if (SocialMedia::where('caption', $description)->exists()) {
-				  echo "This post already exists";
-			  }
-			  else {
-				$insta = new SocialMedia;
-				$insta->username = $username;
-				$insta->profile_pic_url = $profilePic;
-				$insta->tweet = 'N/A';
-				$insta->caption = $description;
-				$insta->imgUrl = $imgUrl;
-				$insta->message = 'N/A';
-				$insta->source = 'Instagram';
-				$insta->link = $link;
-				$insta->width = 0;
-				$insta->height = 0;
-				$insta->resize = 'fit';
-				$insta->approved = 'Pending';
-				$insta->approver_id = -1;
-				$insta->datetime_posted = $datetime_posted;
-				$insta->save();
-				echo "Saved!";
-			  }
-		  }
+		  // $tag = 'ghsnd';
+		  // $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.env('INSTAGRAM_CLIENT_ID');
+		  // $content = file_get_contents($url);
+		  // $json = json_decode($content, true);
+		  // foreach($json['data'] as $images) {
+			//   $imgUrl = $images['images']['standard_resolution']['url'];
+			//   $description = $images['caption']['text'];
+			//   $datetime_posted = $images['caption']['created_time'];
+			//   $datetime_posted = Carbon::createFromTimestamp($datetime_posted)->toDateTimeString();
+			//   $username = $images['caption']['from']['username'];
+			//   $profilePic = $images['caption']['from']['profile_picture'];
+			//   $link = $images['link'];
+			//   if (SocialMedia::where('caption', $description)->exists()) {
+			// 	  echo "This post already exists";
+			//   }
+			//   else {
+			// 	$insta = new SocialMedia;
+			// 	$insta->username = $username;
+			// 	$insta->profile_pic_url = $profilePic;
+			// 	$insta->tweet = 'N/A';
+			// 	$insta->caption = $description;
+			// 	$insta->imgUrl = $imgUrl;
+			// 	$insta->message = 'N/A';
+			// 	$insta->source = 'Instagram';
+			// 	$insta->link = $link;
+			// 	$insta->width = 0;
+			// 	$insta->height = 0;
+			// 	$insta->resize = 'fit';
+			// 	$insta->approved = 'Pending';
+			// 	$insta->approver_id = -1;
+			// 	$insta->datetime_posted = $datetime_posted;
+			// 	$insta->save();
+			// 	echo "Saved!";
+			//   }
+		  // }
 		echo "FINISHED";
     } //end handle
 }

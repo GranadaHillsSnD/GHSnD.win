@@ -18,8 +18,8 @@ class CreateSocialMediaTable extends Migration
             $table->string('username');
             $table->string('profile_pic_url');
             $table->string('tweet');
-            $table->string('caption', 10000);
-            $table->string('message', 10000);
+            $table->string('caption', 1000)->nullable();
+            $table->string('message', 1000)->nullable();
             $table->string('source');
             $table->string('link');
             $table->string('imgUrl');
