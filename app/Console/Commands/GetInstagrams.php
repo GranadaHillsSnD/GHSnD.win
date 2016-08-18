@@ -43,6 +43,7 @@ class GetInstagrams extends Command
 		$content = file_get_contents($url);
 		$json = json_decode($content, true);
 		foreach($json['data'] as $images) {
+          $insta_id = $images['id'];
           $imgUrl = $images['images']['standard_resolution']['url'];
           $description = $images['caption']['text'];
           $datetime_posted = $images['caption']['created_time'];
@@ -50,11 +51,12 @@ class GetInstagrams extends Command
           $username = $images['caption']['from']['username'];
           $profilePic = $images['caption']['from']['profile_picture'];
           $link = $images['link'];
-          if (SocialMedia::where('caption', $description)->exists()) {
+          if (SocialMedia::where('insta_id', $insta_id)->exists()) {
             echo "This post already exists";
           }
           else{
             $insta = new SocialMedia;
+            $insta->insta_id = $insta_id;
             $insta->username = $username;
             $insta->profile_pic_url = $profilePic;
             $insta->tweet = 'N/A';

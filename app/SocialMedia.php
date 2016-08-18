@@ -12,6 +12,7 @@ class SocialMedia extends Model
 
   protected $fillable = ['username',
                         'profile_pic_url',
+                        'insta_id',
                         'tweet',
                         'caption',
                         'imgUrl',
