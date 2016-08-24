@@ -31,6 +31,7 @@
 <script type="text/javascript" src="{{ URL::asset('assets/tinymce/tinymce.min.js') }}"></script>
 <script type="text/javascript">
 tinymce.init({
+  height: "300",
   selector: "textarea",
   plugins: [
       "advlist autolink lists link image charmap print preview anchor",

@@ -18,10 +18,10 @@
       <h1 class="alert alert-success"> {{ Session::get('edited-post') }}</h1>
   @endif
   @foreach($posts as $post)
-    <article class="box post">
-      <div class="message-username username">
+    <article class="box box-admin post">
+      <a href="{{ route('post.edit', ['id' => $post->social_media_id]) }}"><button class="btn btn-danger pull-right">Edit</button></a>
+      <div class="message-username username admin-username">
         <img class="profilePic" src="{{ $post->profile_pic_url }}">
-        <a href="{{ route('post.edit', ['id' => $post->social_media_id]) }}"><button class="btn btn-danger pull-right">Edit</button></a>
         <div class="info">
           <!--
             Note: The date should be formatted exactly as it's shown below. In particular, the

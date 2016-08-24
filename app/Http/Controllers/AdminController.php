@@ -19,7 +19,7 @@ class AdminController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function pending()
     {
         if(\Auth::check()) {
           $social_media = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('approved', 'Pending')->get();

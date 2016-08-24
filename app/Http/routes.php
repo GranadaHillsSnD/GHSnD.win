@@ -47,7 +47,7 @@ Route::get('/admin/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController
 Route::post('/admin/login', ['as' => 'auth.login', 'uses' =>'Auth\AuthController@postLogin']);
 
 Route::get('/admin/logout', 'Auth\AuthController@getLogout');
-Route::get('/admin', ['as' => 'auth', 'uses' => 'AdminController@index']);
+Route::get('/admin/pending', ['as' => 'auth', 'uses' => 'AdminController@pending']);
 
 Route::patch('/admin/media/deny/{id}', ['as' => 'media.deny', 'uses' => 'SocialMediaController@deny']);
 Route::patch('/admin/media/approve/{id}', ['as' => 'media.approve', 'uses' => 'SocialMediaController@approve']);
@@ -58,8 +58,8 @@ Route::get('/admin/denied', 'AdminController@showDenied');
 Route::get('/admin/calendar', 'AdminController@addEvent');
 Route::post('/admin/calendar', 'CalendarController@store');
 
-Route::get('/admin/post', 'AdminController@addPost');
-Route::post('/admin/post', 'AdminController@storePost');
+Route::get('/admin/post/new', 'AdminController@addPost');
+Route::post('/admin/post/new', 'AdminController@storePost');
 Route::get('/admin/post/edit/{id}', ['as' => 'post.edit', 'uses' => 'AdminController@showPost']);
 Route::post('/admin/post/edit/{id}', ['as' => 'post.edit', 'uses' => 'AdminController@update']);
 Route::get('admin/post/edit', 'AdminController@showPosts');
