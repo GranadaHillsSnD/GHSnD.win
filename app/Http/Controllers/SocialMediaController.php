@@ -233,7 +233,7 @@ class SocialMediaController extends Controller
         $media->approver_id = $admin->admin_id;
         $media->save();
 
-        return redirect('/admin');
+        return redirect('/admin/pending');
       }
       else {
         return redirect('/');
@@ -248,7 +248,7 @@ class SocialMediaController extends Controller
         $media->approver_id = $admin->admin_id;
         $media->save();
 
-        return redirect('/admin');
+        return redirect('/admin/pending');
       }
       else {
         return redirect('/');

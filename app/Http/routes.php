@@ -43,6 +43,12 @@ Route::get('unsubscribe/{unsubscribeCode}', [
     'uses' => 'SubscriberController@unsubscribe'
 ]);
 // Authentication routes...
+Route::get('admin', function () {
+    return redirect('admin/pending');
+});
+Route::get('/auth/login', function () {
+    return redirect('admin/login')->with('error', 'That was the wrong password/username combination.');
+});
 Route::get('/admin/login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@getLogin']);
 Route::post('/admin/login', ['as' => 'auth.login', 'uses' =>'Auth\AuthController@postLogin']);
 

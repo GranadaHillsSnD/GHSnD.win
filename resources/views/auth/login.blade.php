@@ -11,6 +11,11 @@
                     <h3 class="panel-title">Please Sign In</h3>
                 </div>
                 <div class="panel-body">
+                    @if(Session::has('error'))
+                      <div class="alert alert-danger">
+                        {{ Session::get('error') }}
+                      </div>
+                    @endif
                     <form method="post">
                         <fieldset>
                             {!! csrf_field() !!}
