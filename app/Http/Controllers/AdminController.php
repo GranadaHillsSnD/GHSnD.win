@@ -71,7 +71,7 @@ class AdminController extends Controller
     public function storePost(Request $request) {
       $post = new SocialMedia;
       $post->username = \Auth::user()->name;
-      $post->profile_pic_url = 'http://ghsnd.win/assets/images/logofixed.png';
+      $post->profile_pic_url = 'http://ghchsnd.com/assets/images/logofixed.png';
       $post->tweet = 'N/A';
       $post->caption = 'N/A';
       $post->imgUrl = 'N/A';

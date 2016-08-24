@@ -86,7 +86,13 @@
 	.subscriber-button {
 		margin-top: 0.5em;
 	}
-
+	.ref {
+		text-decoration: none;
+	}
+	.ref:hover {
+		text-decoration: underline;
+		color: #fff;
+	}
 	</style>
 	@yield('styles')
 	<body>
@@ -228,7 +234,7 @@
 					<ul id="copyright">
 						<li>&copy; GHCHS Speech &amp; Debate.</li>
 						<li>Designed By: Cory Cunanan</li>
-						<li><a href="http://kevincunanan.com">Engineered By: Kevin Cunanan</a></li>
+						<li><a class="ref" href="http://kevincunanan.me">Engineered By: KC</a></li>
 					</ul>
 
 			</div>

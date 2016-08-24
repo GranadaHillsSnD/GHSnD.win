@@ -13,7 +13,7 @@
           <div class="form-group">
             {!! Form::open(['id' => 'post-form']) !!}
             <div class="col-lg-12 div-form">
-              <div class="">
+              <div class="post-form">
                 {!! Form::label('Post Event') !!}
                 {!! Form::textarea('content', null, ['class' => 'form-control', 'id' => 'content', 'placeholder' => 'Post Content', 'maxlength' => 10000]) !!}
               </div>
