@@ -69,33 +69,38 @@ class AdminController extends Controller
     }
 
     public function storePost(Request $request) {
-      $post = new SocialMedia;
-      $post->username = \Auth::user()->name;
-      $post->profile_pic_url = 'http://ghchsnd.com/assets/images/logofixed.png';
-      $post->tweet = 'N/A';
-      $post->caption = 'N/A';
-      $post->imgUrl = 'N/A';
-      $post->message = $request->input('content');
-      $post->source = 'Admin-Post';
-      $post->link = 'N/A';
-      $post->width = 'N/A';
-      $post->height = 'N/A';
-      $post->resize = 'N/A';
-      $post->approved = 'Approved';
-      $post->approver_id = \Auth::user()->admin_id;
-      $post->datetime_posted = \Carbon\Carbon::now();
-      $post->save();
-      $request->session()->flash('added-post', 'Post Added.');
-      $subscribers = DB::table('subscribers')->where('confirmed', 1)->get();
-      foreach($subscribers as $subscriber) {
-        Mail::send('email.announcement', ['admin' => $post->username, 'post' => $post->message, 'code' => $subscriber->unsubscribe], function($message) use($subscriber, $post)
-        {
-          $message->from('team@ghsnd.win', 'GHSnD');
+      if(\Auth::check()) {
+        $post = new SocialMedia;
+        $post->username = \Auth::user()->name;
+        $post->profile_pic_url = 'http://ghchsnd.com/assets/images/logofixed.png';
+        $post->tweet = 'N/A';
+        $post->caption = 'N/A';
+        $post->imgUrl = 'N/A';
+        $post->message = $request->input('content');
+        $post->source = 'Admin-Post';
+        $post->link = 'N/A';
+        $post->width = 'N/A';
+        $post->height = 'N/A';
+        $post->resize = 'N/A';
+        $post->approved = 'Approved';
+        $post->approver_id = \Auth::user()->admin_id;
+        $post->datetime_posted = \Carbon\Carbon::now();
+        $post->save();
+        $request->session()->flash('added-post', 'Post Added.');
+        $subscribers = DB::table('subscribers')->where('confirmed', 1)->get();
+        foreach($subscribers as $subscriber) {
+          Mail::send('email.announcement', ['admin' => $post->username, 'post' => $post->message, 'code' => $subscriber->unsubscribe], function($message) use($subscriber, $post)
+          {
+            $message->from('team@ghchsnd.com', 'GHSnD');
 
-          $message->to($subscriber->email, 'The Team')->subject('New Announcement from '.$post->username);
-        });
+            $message->to($subscriber->email, 'The Team')->subject('New Announcement from '.$post->username);
+          });
+        }
+        return view('auth.post');
       }
-      return view('auth.post');
+      else {
+          return redirect('admin/login');
+      }
 
     }
 
@@ -126,9 +131,15 @@ class AdminController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function showPost($id)
     {
-        //
+        if(\Auth::check()) {
+          $post = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('social_media_id', $id)->get();
+          return view('auth.postEdit', ['admin' => \Auth::user(), 'post' => $post]);
+        }
+        else {
+          return redirect('admin/login');
+        }
     }
 
     /**
@@ -137,9 +148,15 @@ class AdminController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function edit($id)
+    public function showPosts()
     {
-        //
+        if(\Auth::check()) {
+          $posts = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('source', 'Admin-Post')->get();
+          return view('auth.edit', ['admin' => \Auth::user(), 'posts' => $posts]);
+        }
+        else {
+          return redirect('admin/login');
+        }
     }
 
     /**
@@ -151,7 +168,18 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      if(\Auth::check()) {
+        $post = SocialMedia::findOrFail($id);
+        $post->message = $request->input('content');
+        $post->approver_id = \Auth::user()->admin_id;
+        $post->save();
+        $request->session()->flash('edited-post', 'Post Edited.');
+        $posts = DB::table('social_media')->orderBy('datetime_posted', 'asc')->where('source', 'Admin-Post')->get();
+        return view('auth.edit', ['admin' => \Auth::user(), 'posts' => $posts]);
+      }
+      else{
+        return redirect('admin/login');
+      }
     }
 
     /**

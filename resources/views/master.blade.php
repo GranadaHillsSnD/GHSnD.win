@@ -13,6 +13,8 @@
 		<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Cinzel">
 		<link rel="shortcut icon" type="image/png" sizes="16x16" href="favicon.png">
 		<link rel="stylesheet" href="{{ URL::asset('assets/css/main.css') }}" />
+		<link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}" />
+		{{-- <link href="{{ URL::asset('assets/admin/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet"> --}}
 		@yield('extra-links')
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 	</head>
@@ -219,7 +221,7 @@
 				<!-- Recent Posts -->
 					<section class="box recent-posts">
 						<header>
-							<h2>Upcoming Events</h2>
+							<h2 class="upcoming">Upcoming Events</h2>
 						</header>
 						<ul>
 							<?php $calendarEvents = DB::table('calendar_events')->where('start','>=', \Carbon\Carbon::today())->orderBy('start', 'asc')->take(5)->get(); ?>

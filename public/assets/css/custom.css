@@ -1,0 +1,103 @@
+article {
+  background-color: #fff;
+  border-radius: 3px;
+  margin-bottom: 40px;
+  margin-left: -1px;
+  margin-right: -1px;
+  border: 2px solid #edeeee;
+  clear:both;
+  padding: 1em 1em 1em 1em;
+}
+p {
+    margin: 0 0 10px;
+}
+ol, ul {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+p.caption {
+  font-size: 1.3em;
+  line-height: 1.3em;
+  font-weight: lighter;
+  font-family: 'Arial, Helvetica', sans-serif;
+}
+.upcoming {
+  font-size: 1.2em;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-weight: 700;
+  color: #232323;
+}
+.profilePic {
+  border-radius: 50px;
+  height: 50px;
+  width: 50px;
+}
+.caption {
+  font-size: 1.3em;
+  line-height: 1.3em;
+  font-weight: lighter;
+}
+ul.pagination {
+  list-style-type: none;
+  text-align: center;
+}
+ul.pagination li {
+  display: inline;
+  padding: 0 5px 0 5px;
+}
+.inner {
+  overflow: hidden;
+}
+.box.post h2 {
+  font-size: 24px;
+}
+@media screen and (min-width: 737px) {
+  .post-excerpt {
+    padding-bottom: 2.5em;
+  }
+  .image img {
+    width: 450px;
+    display: inline-block;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .post-excerpt {
+    text-align: center;
+  }
+}
+@media screen and (max-width: 999px) {
+  .post-excerpt {
+    text-align: center;
+  }
+  .post {
+    border-bottom: solid 1px #ddd;
+  }
+}
+.twitter-title {
+  color: #55acee;
+}
+.insta-title {
+  color: #af8a72;
+}
+.fa-twitter {
+  padding-right: 10px;
+}
+.fa-instagram {
+  padding-right: 15px;
+}
+.message {
+  padding: 1em 2em 1em 2em;
+}
+.message-username {
+  text-align: center;
+}
+.message-username h2{
+  line-height: 24px;
+}
+div.message ul {
+  list-style: disc;
+}
+.flash {
+  text-align: center;
+  text-decoration: underline;
+}

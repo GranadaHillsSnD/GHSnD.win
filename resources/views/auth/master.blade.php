@@ -22,6 +22,8 @@
 
     <!-- Custom Fonts -->
     <link href="{{ URL::asset('assets/admin/bower_components/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/admin.css') }}" />
     @yield('stylesheets')
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

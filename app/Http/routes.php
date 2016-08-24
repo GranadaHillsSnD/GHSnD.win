@@ -60,4 +60,6 @@ Route::post('/admin/calendar', 'CalendarController@store');
 
 Route::get('/admin/post', 'AdminController@addPost');
 Route::post('/admin/post', 'AdminController@storePost');
+Route::get('/admin/post/edit/{id}', ['as' => 'post.edit', 'uses' => 'AdminController@showPost']);
+Route::post('/admin/post/edit/{id}', ['as' => 'post.edit', 'uses' => 'AdminController@update']);
 Route::get('admin/post/edit', 'AdminController@showPosts');
