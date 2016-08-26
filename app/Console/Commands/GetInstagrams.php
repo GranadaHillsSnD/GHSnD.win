@@ -51,7 +51,7 @@ class GetInstagrams extends Command
           $username = $images['user']['username'];
           $profilePic = $images['user']['profile_picture'];
           $link = $images['link'];
-          if (SocialMedia::where('insta_id', $insta_id)->exists()) {
+          if (SocialMedia::where('insta_id', $insta_id)->exists() || $description == null) {
             echo "This post already exists";
           }
           else{
@@ -61,12 +61,15 @@ class GetInstagrams extends Command
             $insta->profile_pic_url = $profilePic;
             $insta->tweet = 'N/A';
             $insta->caption = $description;
-            $insta->imgUrl = $imgUrl;
             $insta->message = 'N/A';
             $insta->source = 'Admin-Insta';
+            $type = substr($imgUrl, -3);
+            if (!file_exists('public/instagrams')) {
+              mkdir('public/instagrams', 0777, true);
+            }
+            $localUrl = 'public/instagrams/'.$insta_id.'.jpg';
+            file_put_contents('public/instagrams/'.$insta_id.'.jpg', file_get_contents($imgUrl));
             $insta->link = $link;
-            $insta->width = 0;
-            $insta->height = 0;
             $insta->resize = 'fit';
             $insta->approved = 'Approved';
             $insta->approver_id = -1;

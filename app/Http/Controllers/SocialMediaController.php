@@ -39,8 +39,6 @@ class SocialMediaController extends Controller
             $insta->message = 'N/A';
             $insta->source = 'Instagram';
             $insta->link = $link;
-            $insta->width = 0;
-            $insta->height = 0;
             $insta->resize = 'fit';
             $insta->approved = 'Pending';
             $insta->approver_id = -1;
@@ -75,8 +73,6 @@ class SocialMediaController extends Controller
             $insta->message = 'N/A';
             $insta->source = 'Admin-Insta';
             $insta->link = $link;
-            $insta->width = 0;
-            $insta->height = 0;
             $insta->resize = 'fit';
             $insta->approved = 'Approved';
             $insta->approver_id = -1;

@@ -22,10 +22,11 @@ class CreateSocialMediaTable extends Migration
             $table->string('message', 10000)->nullable();
             $table->string('source');
             $table->string('link');
-            $table->string('imgUrl');
-            $table->integer('width');
-            $table->integer('height');
             $table->string('resize');
+            $table->string('file1_name')->nullable();
+            $table->string('file1_url')->nullable();
+            $table->string('file2_name')->nullable();
+            $table->string('file2_url')->nullable();m
             $table->string('approved');
             $table->integer('approver_id');
             $table->datetime('datetime_posted');

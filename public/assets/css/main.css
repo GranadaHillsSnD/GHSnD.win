@@ -1569,7 +1569,8 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 		input[type="reset"]:hover,
 		button:hover,
 		.button:hover {
-			background-color: #d95673;
+			background-color: #17631c;
+			color: #fff;
 		}
 
 		input[type="button"]:active,
@@ -1577,7 +1578,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 		input[type="reset"]:active,
 		button:active,
 		.button:active {
-			background-color: #b93653;
+			background-color: #17631c;
 		}
 
 		input[type="button"].alt,

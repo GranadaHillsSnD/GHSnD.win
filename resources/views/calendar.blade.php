@@ -41,10 +41,7 @@
 			@foreach($calendarEvents as $event)
 				<div>
 					@if($event->start >= \Carbon\Carbon::today())
-						@if($event->all_day == '1')
-							<span class="">{{$event->title}}</span> <span class="pull-right">{{ date('l, F d Y', strtotime($event->start)) }}</span>
-						@else
-							<span class="">{{$event->title}}</span> <span class="pull-right">{{ date('l, F d Y @ h:i a', strtotime($event->start)) }}</span>
+							<span class="">{{$event->title}}</span> <a href="{{ URL::asset('/uploads/'.$event->file1_name) }}">{{ $event->file1_name }}</a> @if($event->all_day == '1')<span class="pull-right">{{ date('l, F d Y', strtotime($event->start)) }}</span>@else<span class="pull-right">{{ date('l, F d Y @ h:i a', strtotime($event->start)) }}</span>
 						@endif
 					@endif
 				</div>
@@ -66,19 +63,17 @@
 			eventLimit: true, // allow "more" link when too many events
 			events: [
 			@foreach($calendarEvents as $event)
-				@if($event->all_day == 1)
 				{
 					title: '{{ $event->title }}',
-					start: "{{ substr($event->start, 0, 10) }}",
-					end: "{{ substr($event->end, 0, 10) }}"
-				},
-				@else
-				{
-					title: '{{ $event->title }}',
+					@if($event->all_day == 1)
+						start: "{{ substr($event->start, 0, 10) }}",
+						end: "{{ substr($event->end, 0, 10) }}",
+					@else
 					start: "{{ str_replace(' ', 'T', $event->start) }}",
-					end: "{{ str_replace(' ', 'T', $event->end) }}"
+					end: "{{ str_replace(' ', 'T', $event->end) }}",
+					@endif
+					backgroundColor: "#{{ $event->color }}"
 				},
-				@endif
 			@endforeach
 						]
 			});

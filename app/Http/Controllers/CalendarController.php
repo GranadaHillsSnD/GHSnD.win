@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Goutte\Client;
 use Calendar;
 use DB;
+use Carbon\Carbon;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -84,11 +85,29 @@ class CalendarController extends Controller
         $event->all_day = $request->input('all_day');
         $date_start = $request->input('start-date')." 00:00:00";
         $event->start = $date_start;
-        $date_end = $request->input('end-date')." 00:00:00";
+        $carbon = Carbon::createFromFormat('Y-m-d H:i:s', $request->input('end-date')." 00:00:00");
+        $date_end = $carbon->addDays(1);
         $event->end = $date_end;
       }
+      $event->description = $request->input('description');
+      $event->color = $request->input('calendar-color');
+      $event->location = $request->input('location');
+      if($request->file('file-1')) {
+          $destinationPath = 'uploads';
+          $fileName = uniqid() . $request->file('file-1')->getClientOriginalName();
+          $path = $request->file('file-1')->move($destinationPath, $fileName);
+          $event->file1_name = $fileName;
+          $event->file1_url = $path;
+      }
+      if($request->file('file-2')) {
+          $destinationPath = 'uploads';
+          $fileName = uniqid() . $request->file('file-2')->getClientOriginalName();
+          $path = $request->file('file-2')->move($destinationPath, $fileName);
+          $event->file1_name = $fileName;
+          $event->file1_url = $path;
+      }
+      $request->session()->flash('added', $event->title. " event added!");
       $event->save();
-      $request->session()->flash('added', 'Event Added.');
       return view('auth.calendar');
     }
 

@@ -15,6 +15,13 @@ class CreateCalendarEvents extends Migration
         Schema::create('calendar_events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
+            $table->string('color');
+            $table->string('description', 5000);
+            $table->string('location');
+            $table->string('file1_name')->nullable();
+            $table->string('file1_url')->nullable();
+            $table->string('file2_name')->nullable();
+            $table->string('file2_url')->nullable();
             $table->datetime('start');
             $table->datetime('end');
             $table->boolean('all_day');
