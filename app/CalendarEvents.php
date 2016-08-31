@@ -10,8 +10,9 @@ class CalendarEvents extends Model
 
   protected $primaryKey = 'event_id';
 
-  protected $fillable = ['title', 'all_day',
-                      'start', 'end', 'url',
+  protected $fillable = ['title', 'all_day', 'color', 'description', 'location',
+                      'file1_name', 'file1_url', 'file2_name', 'file2_url',
+                      'start', 'end',
                       'updated_at', 'created_at'];
 
   protected $dates = ['start', 'end'];

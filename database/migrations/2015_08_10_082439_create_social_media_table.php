@@ -26,7 +26,7 @@ class CreateSocialMediaTable extends Migration
             $table->string('file1_name')->nullable();
             $table->string('file1_url')->nullable();
             $table->string('file2_name')->nullable();
-            $table->string('file2_url')->nullable();m
+            $table->string('file2_url')->nullable();
             $table->string('approved');
             $table->integer('approver_id');
             $table->datetime('datetime_posted');
