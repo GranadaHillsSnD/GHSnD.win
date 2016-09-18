@@ -75,12 +75,9 @@ class AdminController extends Controller
         $post->profile_pic_url = 'http://ghchsnd.com/assets/images/logofixed.png';
         $post->tweet = 'N/A';
         $post->caption = 'N/A';
-        $post->imgUrl = 'N/A';
         $post->message = $request->input('content');
         $post->source = 'Admin-Post';
         $post->link = 'N/A';
-        $post->width = 'N/A';
-        $post->height = 'N/A';
         $post->resize = 'N/A';
         $post->approved = 'Approved';
         $post->approver_id = \Auth::user()->admin_id;

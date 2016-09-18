@@ -53,7 +53,7 @@
                             {{ $post->tweet }}
                           @endif
                         </p>
-                        <div class="mediaSection">@if($post->imgUrl != 'N/A')<img src="{{ $post->imgUrl }}" class="postMedia">@endif</div>
+                        <div class="mediaSection">@if($post->source == 'Instagram' || $post->source == 'Admin-Insta')<img src="{{ URL::asset('/instagrams/'.$post->insta_id.'.jpg') }}" class="postMedia">@endif</div>
                       </div>
                     @endforeach
                 </div>

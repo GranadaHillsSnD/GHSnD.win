@@ -173,7 +173,7 @@
             <li><a href="#" class="icon fa-facebook">128</a></li>
           </ul>
         </div>
-        @if($post->link != 'N/A')<a href="{{ $post->link }}" class="image featured">@if($post->imgUrl != 'N/A')<img src="{{ URL::asset('/instagrams/'.$post->insta_id.'.jpg') }}" alt=""/>@endif</a>@endif
+        @if($post->link != 'N/A')<a href="{{ $post->link }}" class="image featured"><img src="{{ URL::asset('/instagrams/'.$post->insta_id.'.jpg') }}" alt=""/></a>@endif
         <p class="caption">
           @if($post->source == 'Instagram' || $post->source == 'Admin-Insta')
             {{ $post->caption }}

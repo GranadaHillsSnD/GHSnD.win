@@ -69,18 +69,16 @@ class GetTweets extends Command
           $username = $tweet_info['user']['screen_name'];
           $profile_img = $tweet_info['user']['profile_image_url'];
           $link = $imgUrl = $resize = 'N/A';
-          $height = $width = -1;
+          // if (!file_exists('public/tweets')) {
+          //   mkdir('public/tweets', 0777, true);
+          // }
+          // $localUrl = 'public/tweets/'.$insta_id.'.jpg';
+          // file_put_contents('public/tweets/'.$insta_id.'.jpg', file_get_contents($imgUrl));
           if(isset($tweet_info['entities']['media'][0]['expanded_url'])) {
             $link = $tweet_info['entities']['media'][0]['expanded_url'];
           }
           if(isset($tweet_info['entities']['media'][0]['media_url_https'])) {
             $imgUrl = $tweet_info['entities']['media'][0]['media_url_https'];
-          }
-          if(isset($tweet_info['entities']['media'][0]['sizes']['large']['h'])) {
-            $height = $tweet_info['entities']['media'][0]['sizes']['large']['h'];
-          }
-          if(isset($tweet_info['entities']['media'][0]['sizes']['large']['w'])) {
-            $width = $tweet_info['entities']['media'][0]['sizes']['large']['w'];
           }
           if(isset($tweet_info['entities']['media'][0]['sizes']['large']['resize'])) {
             $resize = $tweet_info['entities']['media'][0]['sizes']['large']['resize'];
@@ -95,10 +93,7 @@ class GetTweets extends Command
             $newTweet->tweet = $tweet;
             $newTweet->caption = 'N/A';
             $newTweet->message = 'N/A';
-            $newTweet->imgUrl = $imgUrl;
             $newTweet->link = $link;
-            $newTweet->width = $width;
-            $newTweet->height = $height;
             $newTweet->source = 'Admin-Twitter';
             $newTweet->approved = 'Approved';
             $newTweet->approver_id = -1;
