@@ -6,6 +6,11 @@ use App\SocialMedia;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
+function runSync() {
+    chdir('/homepages/37/d587320544/htdocs/GHSnD');
+    shell_exec('./sync.sh'); //moving things to public after image upload
+}
+
 class GetInstagrams extends Command
 {
     /**
@@ -78,6 +83,7 @@ class GetInstagrams extends Command
             echo "Saved!";
           }
         }
+        runSync();
 
 		  // $tag = 'ghsnd';
 		  // $url = 'https://api.instagram.com/v1/tags/'.$tag.'/media/recent?client_id='.env('INSTAGRAM_CLIENT_ID');
